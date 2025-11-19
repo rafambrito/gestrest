@@ -66,12 +66,6 @@
             <version>2.5.0</version>
         </dependency>
         
-        <!-- H2 REMOVER DEPOIS DE CONFIGURAR O POSTGRESQL -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
