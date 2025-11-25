@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: db_fiap
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: gestrest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fiap
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    image: dttpaula/grupo16-1techchallenge:1.0
+    container_name: api_fiap
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gestrest
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    networks:
+      - fiap
+
+networks:
+  fiap:
+    external: true   # Usa a rede 'fiap' já criada manualmente
+
+volumes:
+  postgres_data:
