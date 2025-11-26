@@ -31,7 +31,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/hello")
     public String getUsers() {
         logger.info("Listing users");
         return "Hello Users";

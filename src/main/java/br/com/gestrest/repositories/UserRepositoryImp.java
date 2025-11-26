@@ -20,7 +20,7 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public Optional<User> findById(Long id) {
         return this.jdbcClient
-            .sql("SELECT * FROM User WHERE Id = :id")
+            .sql("SELECT id, name, email, password, profile, username FROM users WHERE id = :id")
             .param("id", id)
             .query(User.class)
             .optional();
@@ -29,7 +29,7 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public List<User> findAll(int size, int offset) {
         return this.jdbcClient
-            .sql("SELECT * FROM User WHERE LIMIT = :size OFFSET = :offset")
+            .sql("SELECT id, name, email, password, profile, username FROM users ORDER BY id LIMIT :size OFFSET :offset")
             .param("size", size)
             .param("offset", offset)
             .query(User.class)
@@ -39,33 +39,33 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public Integer save(User newUser) {
         return this.jdbcClient
-            .sql("INSERT INTO User (Name, Email, Password, Profile, Username) VALUES (:Name, :Email, :Password, :Profile, :Username) ")
-            .param("Name", newUser.getName())
-            .param("Email", newUser.getEmail())
-            .param("Password", newUser.getPassword())
-            .param("Profile", newUser.getProfile())
-            .param("Username", newUser.getUsername())
+            .sql("INSERT INTO users (name, email, password, profile, username) VALUES (:name, :email, :password, :profile, :username)")
+            .param("name", newUser.getName())
+            .param("email", newUser.getEmail())
+            .param("password", newUser.getPassword())
+            .param("profile", newUser.getProfile())
+            .param("username", newUser.getUsername())
             .update();
     }
 
     @Override
     public Integer update(User oldUser, Long id) {
         return this.jdbcClient
-            .sql("UPDATE User SET Name = :Name, Email = :Email, Password = :Password, Profile =:Profile, Username = :Username WHERE Id = :id")
-            .param("Id", id)
-            .param("Name", oldUser.getName())
-            .param("Email", oldUser.getEmail())
-            .param("Password", oldUser.getPassword())
-            .param("Profile", oldUser.getProfile())
-            .param("Username", oldUser.getUsername())
+            .sql("UPDATE users SET name = :name, email = :email, password = :password, profile = :profile, username = :username WHERE id = :id")
+            .param("id", id)
+            .param("name", oldUser.getName())
+            .param("email", oldUser.getEmail())
+            .param("password", oldUser.getPassword())
+            .param("profile", oldUser.getProfile())
+            .param("username", oldUser.getUsername())
             .update();
     }
 
     @Override
     public Integer delete(Long id) {
         return this.jdbcClient
-            .sql("DELETE FROM User WHERE Id = :id")
-            .param("Id", id)
+            .sql("DELETE FROM users WHERE id = :id")
+            .param("id", id)
             .update();
     }
 
