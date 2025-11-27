@@ -28,7 +28,7 @@ public class UserService {
 
     public void saveUser(User newUser) {
         var save = this.userRepository.save(newUser);
-        Assert.state(save == 1, "Error saving user " + newUser.getName());
+        Assert.state(save == 1, "Error saving user " + newUser.getNome());
     }
 
     public void updateUser(User oldUser, Long id) {

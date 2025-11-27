@@ -1,42 +1,58 @@
 package br.com.gestrest.entities;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class User {
 
-    private Long id;
-    private String name;
+    // Campos espelhando os nomes da tabela gestrest.usuario
+    private Long usuarioId;
+    private String nome;
     private String email;
-    private String password;
-    private String profile;
-    private String username;
+    private String login;
+    private String senha;
+    private Integer estado;
+    private Integer tipoUsuarioId;
+    private Integer enderecoId;
+    private LocalDateTime dataUltimaAlteracao;
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String password, String profile, String username) {
-        this.id = id;
-        this.name = name;
+    public User(Long usuarioId,
+                String nome,
+                String email,
+                String login,
+                String senha,
+                Integer estado,
+                Integer tipoUsuarioId,
+                Integer enderecoId,
+                LocalDateTime dataUltimaAlteracao) {
+        this.usuarioId = usuarioId;
+        this.nome = nome;
         this.email = email;
-        this.password = password;
-        this.profile = profile;
-        this.username = username;
+        this.login = login;
+        this.senha = senha;
+        this.estado = estado;
+        this.tipoUsuarioId = tipoUsuarioId;
+        this.enderecoId = enderecoId;
+        this.dataUltimaAlteracao = dataUltimaAlteracao;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -47,28 +63,52 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getLogin() {
+        return login;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public String getProfile() {
-        return profile;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getEstado() {
+        return estado;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
+    public Integer getTipoUsuarioId() {
+        return tipoUsuarioId;
+    }
+
+    public void setTipoUsuarioId(Integer tipoUsuarioId) {
+        this.tipoUsuarioId = tipoUsuarioId;
+    }
+
+    public Integer getEnderecoId() {
+        return enderecoId;
+    }
+
+    public void setEnderecoId(Integer enderecoId) {
+        this.enderecoId = enderecoId;
+    }
+
+    public LocalDateTime getDataUltimaAlteracao() {
+        return dataUltimaAlteracao;
+    }
+
+    public void setDataUltimaAlteracao(LocalDateTime dataUltimaAlteracao) {
+        this.dataUltimaAlteracao = dataUltimaAlteracao;
     }
 
     @Override
@@ -80,25 +120,27 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id)
-                && Objects.equals(name, user.name)
+        return Objects.equals(usuarioId, user.usuarioId)
                 && Objects.equals(email, user.email)
-                && Objects.equals(username, user.username);
+                && Objects.equals(login, user.login);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, username);
+        return Objects.hash(usuarioId, email, login);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "usuarioId=" + usuarioId +
+                ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
-                ", profile='" + profile + '\'' +
-                ", username='" + username + '\'' +
+                ", login='" + login + '\'' +
+                ", estado=" + estado +
+                ", tipoUsuarioId=" + tipoUsuarioId +
+                ", enderecoId=" + enderecoId +
+                ", dataUltimaAlteracao=" + dataUltimaAlteracao +
                 '}';
     }
 }

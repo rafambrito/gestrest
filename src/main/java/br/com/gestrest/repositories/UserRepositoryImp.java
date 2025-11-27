@@ -20,7 +20,20 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public Optional<User> findById(Long id) {
         return this.jdbcClient
-            .sql("SELECT id, name, email, password, profile, username FROM users WHERE id = :id")
+            .sql("""
+                    SELECT
+                        usuario_id,
+                        nome,
+                        email,
+                        login,
+                        senha,
+                        estado,
+                        tipo_usuario_id,
+                        endereco_id,
+                        data_ultima_alteracao
+                    FROM gestrest.usuario
+                    WHERE usuario_id = :id
+                  """)
             .param("id", id)
             .query(User.class)
             .optional();
@@ -29,7 +42,21 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public List<User> findAll(int size, int offset) {
         return this.jdbcClient
-            .sql("SELECT id, name, email, password, profile, username FROM users ORDER BY id LIMIT :size OFFSET :offset")
+            .sql("""
+                    SELECT
+                        usuario_id,
+                        nome,
+                        email,
+                        login,
+                        senha,
+                        estado,
+                        tipo_usuario_id,
+                        endereco_id,
+                        data_ultima_alteracao
+                    FROM gestrest.usuario
+                    ORDER BY usuario_id
+                    LIMIT :size OFFSET :offset
+                  """)
             .param("size", size)
             .param("offset", offset)
             .query(User.class)
@@ -39,32 +66,30 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public Integer save(User newUser) {
         return this.jdbcClient
-            .sql("INSERT INTO users (name, email, password, profile, username) VALUES (:name, :email, :password, :profile, :username)")
-            .param("name", newUser.getName())
+            .sql("INSERT INTO gestrest.usuario (nome, email, login, senha) VALUES (:nome, :email, :login, :senha)")
+            .param("nome", newUser.getNome())
             .param("email", newUser.getEmail())
-            .param("password", newUser.getPassword())
-            .param("profile", newUser.getProfile())
-            .param("username", newUser.getUsername())
+            .param("login", newUser.getLogin())
+            .param("senha", newUser.getSenha())
             .update();
     }
 
     @Override
     public Integer update(User oldUser, Long id) {
         return this.jdbcClient
-            .sql("UPDATE users SET name = :name, email = :email, password = :password, profile = :profile, username = :username WHERE id = :id")
+            .sql("UPDATE gestrest.usuario SET nome = :nome, email = :email, login = :login, senha = :senha WHERE usuario_id = :id")
             .param("id", id)
-            .param("name", oldUser.getName())
+            .param("nome", oldUser.getNome())
             .param("email", oldUser.getEmail())
-            .param("password", oldUser.getPassword())
-            .param("profile", oldUser.getProfile())
-            .param("username", oldUser.getUsername())
+            .param("login", oldUser.getLogin())
+            .param("senha", oldUser.getSenha())
             .update();
     }
 
     @Override
     public Integer delete(Long id) {
         return this.jdbcClient
-            .sql("DELETE FROM users WHERE id = :id")
+            .sql("DELETE FROM gestrest.usuario WHERE usuario_id = :id")
             .param("id", id)
             .update();
     }
