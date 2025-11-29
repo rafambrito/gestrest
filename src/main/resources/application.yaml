@@ -1,13 +1,13 @@
 spring:
   application:
-    name: gestrest	 
+    name: gestrest
 
   # DataSource H2 em memória (sem instalação)
   datasource:
-    url: jdbc:h2:mem:restapi;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/gestrest
+    driver-class-name: org.postgresql.Driver
+    username: admin
+    password: admin
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,6 +15,7 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   mvc:
     problemdetails:
