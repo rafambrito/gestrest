@@ -30,6 +30,42 @@ public class UserService {
         return this.userRepository.findById(id);
     }
 
+    public User login(String login, String senha) {
+        var userOpt = this.userRepository.findByLogin(login);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        var user = userOpt.get();
+
+        if (user.getEstado() != null && user.getEstado() != 1) {
+            throw new RuntimeException("User inactive");
+        }
+
+        String stored = user.getSenha();
+        boolean matches;
+
+        // Se já estiver em BCrypt, usa o encoder normalmente
+        if (stored != null && stored.startsWith("$2")) {
+            matches = passwordEncoder.matches(senha, stored);
+        } else {
+            // Suporta senhas antigas em texto puro (como o admin criado pelo script)
+            matches = senha.equals(stored);
+            if (matches) {
+                // Faz upgrade para hash e persiste
+                String hashed = passwordEncoder.encode(senha);
+                user.setSenha(hashed);
+                this.userRepository.updatePassword(user.getUsuarioId(), hashed);
+            }
+        }
+
+        if (!matches) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        return user;
+    }
+
     public void saveUser(User newUser) {
         newUser.setSenha(passwordEncoder.encode(newUser.getSenha()));
 
