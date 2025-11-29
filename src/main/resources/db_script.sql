@@ -41,7 +41,7 @@ CREATE TABLE usuario (
   nome VARCHAR(255) NOT NULL,
   email VARCHAR(120) NOT NULL,
   login VARCHAR(45) NOT NULL,
-  senha VARCHAR(45) NOT NULL,
+  senha VARCHAR(100) NOT NULL,
   data_ultima_alteracao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   estado INTEGER NOT NULL DEFAULT 1,
   tipo_usuario_id INTEGER NOT NULL DEFAULT 1,
@@ -196,3 +196,7 @@ CREATE TABLE pedido (
 
 CREATE INDEX idx_pedido_item_cardapio ON pedido (item_cardapio_id, restaurante_id);
 CREATE INDEX idx_pedido_usuario ON pedido (usuario_id);
+
+-- Usuário administrador padrão para primeiro acesso
+INSERT INTO usuario (nome, email, login, senha, estado, tipo_usuario_id, endereco_id)
+VALUES ('Administrador', 'admin@gestrest.com', 'admin', 'admin', 1, 1, 1);

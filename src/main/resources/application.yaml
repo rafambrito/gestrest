@@ -37,3 +37,9 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+gestrest:
+  jwt:
+    # chave de exemplo - troque por uma string aleatória longa em produção
+    secret: "gestrest-super-secret-key-32-chars-minimo-123"
+    expiration-minutes: 60

@@ -64,6 +64,28 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByLogin(String login) {
+        return this.jdbcClient
+            .sql("""
+                    SELECT
+                        usuario_id,
+                        nome,
+                        email,
+                        login,
+                        senha,
+                        estado,
+                        tipo_usuario_id,
+                        endereco_id,
+                        data_ultima_alteracao
+                    FROM gestrest.usuario
+                    WHERE login = :login
+                  """)
+            .param("login", login)
+            .query(User.class)
+            .optional();
+    }
+
+    @Override
     public Integer save(User newUser) {
         return this.jdbcClient
             .sql("INSERT INTO gestrest.usuario (nome, email, login, senha) VALUES (:nome, :email, :login, :senha)")
@@ -83,6 +105,15 @@ public class UserRepositoryImp implements UserRepository {
             .param("email", oldUser.getEmail())
             .param("login", oldUser.getLogin())
             .param("senha", oldUser.getSenha())
+            .update();
+    }
+
+    @Override
+    public Integer updatePassword(Long id, String senha) {
+        return this.jdbcClient
+            .sql("UPDATE gestrest.usuario SET senha = :senha, data_ultima_alteracao = CURRENT_TIMESTAMP WHERE usuario_id = :id")
+            .param("id", id)
+            .param("senha", senha)
             .update();
     }
 
