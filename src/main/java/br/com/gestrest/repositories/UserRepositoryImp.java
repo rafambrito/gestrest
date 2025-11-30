@@ -99,12 +99,11 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public Integer update(User oldUser, Long id) {
         return this.jdbcClient
-            .sql("UPDATE gestrest.usuario SET nome = :nome, email = :email, login = :login, senha = :senha WHERE usuario_id = :id")
+                .sql("UPDATE gestrest.usuario SET nome = :nome, email = :email, login = :login WHERE usuario_id = :id")
             .param("id", id)
             .param("nome", oldUser.getNome())
             .param("email", oldUser.getEmail())
             .param("login", oldUser.getLogin())
-            .param("senha", oldUser.getSenha())
             .update();
     }
 
