@@ -3,17 +3,36 @@ package br.com.gestrest.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Representa um usuário do sistema")
 public class User {
 
-    // Campos espelhando os nomes da tabela gestrest.usuario
+	@Schema(description = "ID único do usuário", example = "1")
     private Long usuarioId;
+	
+	@Schema(description = "Nome completo do usuário", example = "Rafael Brito")
     private String nome;
+	
+	@Schema(description = "Email do usuário", example = "rafael@example.com")
     private String email;
+	
+	@Schema(description = "Login do usuário", example = "rafael@example.com")
     private String login;
+	
+	@Schema(description = "Senha do usuário", example = "123456")
     private String senha;
+	
+	@Schema(description = "Estado do usuário", example = "1")
     private Integer estado;
+	
+	@Schema(description = "Email do usuário", example = "1")
     private Integer tipoUsuarioId;
+	
+	@Schema(description = "Id do endereço", example = "1")
     private Integer enderecoId;
+	
+	@Schema(description = "Data da ultima alteração", example = "30/11/2025 20:35")
     private LocalDateTime dataUltimaAlteracao;
 
     public User() {

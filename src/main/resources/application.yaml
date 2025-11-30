@@ -2,22 +2,12 @@ spring:
   application:
     name: gestrest
 
-  # DataSource H2 em memória (sem instalação)
-  datasource:
-    url: jdbc:postgresql://localhost:5432/gestrest
-    driver-class-name: org.postgresql.Driver
-    username: admin
-    password: admin
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-  mvc:
+datasource:
+   url: jdbc:postgresql://postgres:5432/gestrest
+   username: admin
+   password: admin
+      
+mvc:
     problemdetails:
       enabled: true  # ativa respostas RFC 7807
 
