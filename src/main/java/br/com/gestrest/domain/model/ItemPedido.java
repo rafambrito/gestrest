@@ -9,21 +9,16 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Entity
-@Table(name = "item_pedido", schema = "gestrest")
+@Table(name = "item_pedido")
+@Getter @Setter
 public class ItemPedido {
 
     @EmbeddedId
     private ItemPedidoPK id;
-
-    @Column(name = "qtde_item", nullable = false)
-    private Integer quantidade;
-
-    @Column(name = "valor_unitario", nullable = false)
-    private Double valorUnitario;
 
     @ManyToOne
     @MapsId("pedidoId")
@@ -32,8 +27,15 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumns({
-        @JoinColumn(name = "item_cardapio_id", referencedColumnName = "item_cardapio_id"),
-        @JoinColumn(name = "restaurante_id", referencedColumnName = "restaurante_id")
+            @JoinColumn(name = "item_cardapio_id", referencedColumnName = "item_cardapio_id", insertable = false, updatable = false),
+            @JoinColumn(name = "restaurante_id", referencedColumnName = "restaurante_id", insertable = false, updatable = false)
     })
+    @MapsId("itemCardapioId")
     private ItemCardapio itemCardapio;
+
+    @Column(name = "qtde_item")
+    private Integer qtdeItem;
+
+    @Column(name = "valor_unitario")
+    private Double valorUnitario;
 }
