@@ -4,6 +4,7 @@ import br.com.gestrest.domain.pk.ItemPedidoPK;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
@@ -18,24 +19,23 @@ import lombok.Setter;
 public class ItemPedido {
 
     @EmbeddedId
-    private ItemPedidoPK id;
+    private ItemPedidoPK id = new ItemPedidoPK();
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @MapsId("pedidoId")
-    @JoinColumn(name = "pedido_id")
+    @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "item_cardapio_id", referencedColumnName = "item_cardapio_id", insertable = false, updatable = false),
-            @JoinColumn(name = "restaurante_id", referencedColumnName = "restaurante_id", insertable = false, updatable = false)
+        @JoinColumn(name = "item_cardapio_id", referencedColumnName = "item_cardapio_id", insertable = false, updatable = false),
+        @JoinColumn(name = "restaurante_id", referencedColumnName = "restaurante_id", insertable = false, updatable = false)
     })
-    @MapsId("itemCardapioId")
     private ItemCardapio itemCardapio;
 
-    @Column(name = "qtde_item")
+    @Column(name = "qtde_item", nullable = false)
     private Integer qtdeItem;
 
-    @Column(name = "valor_unitario")
+    @Column(name = "valor_unitario", nullable = false)
     private Double valorUnitario;
 }

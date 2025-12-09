@@ -1,10 +1,13 @@
 package br.com.gestrest.domain.model;
 
+import br.com.gestrest.domain.pk.ItemCardapioPK;
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,26 +17,27 @@ import lombok.Setter;
 @Getter @Setter
 public class ItemCardapio {
 
-    @Id
-    @Column(name = "item_cardapio_id")
-    private Long id;
+    @EmbeddedId
+    private ItemCardapioPK id = new ItemCardapioPK();
 
-    @ManyToOne
-    @JoinColumn(name = "restaurante_id", insertable = false, updatable = false)
+    @MapsId("restauranteId")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurante_id", nullable = false)
     private Restaurante restaurante;
 
-    @Column(nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @Column(name = "ingredientes")
     private String ingredientes;
 
-    @Column(nullable = false)
+    @Column(name = "valor", nullable = false)
     private Double valor;
 
-    @Column(nullable = false)
+    @Column(name = "estado", nullable = false)
     private Integer estado;
 
-    @ManyToOne
-    @JoinColumn(name = "tipo_item_cardapio_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo_item_cardapio_id", nullable = false)
     private TipoItemCardapio tipoItemCardapio;
 }
