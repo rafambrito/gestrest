@@ -12,26 +12,26 @@ import lombok.Setter;
 
 @Embeddable
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ItemCardapioPK implements Serializable {
+public class AvaliacaoPK implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "item_cardapio_id")
-    private Long itemCardapioId;
+    @Column(name = "avaliacao_id")
+    private Long avaliacaoId;
 
-    @Column(name = "restaurante_id")
-    private Long restauranteId;
+    @Column(name = "usuario_id")
+    private Long usuarioId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ItemCardapioPK)) return false;
-        ItemCardapioPK that = (ItemCardapioPK) o;
-        return Objects.equals(itemCardapioId, that.itemCardapioId) &&
-               Objects.equals(restauranteId, that.restauranteId);
+        if (!(o instanceof AvaliacaoPK)) return false;
+        AvaliacaoPK that = (AvaliacaoPK) o;
+        return Objects.equals(avaliacaoId, that.avaliacaoId) &&
+               Objects.equals(usuarioId, that.usuarioId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemCardapioId, restauranteId);
+        return Objects.hash(avaliacaoId, usuarioId);
     }
 }

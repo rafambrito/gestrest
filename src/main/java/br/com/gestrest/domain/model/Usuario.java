@@ -4,17 +4,21 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
 @Table(name = "usuario")
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Usuario {
 
     @Id
@@ -31,20 +35,20 @@ public class Usuario {
     @Column(nullable = false, length = 45)
     private String login;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String senha;
 
     @Column(name = "data_ultima_alteracao", nullable = false)
     private LocalDateTime dataUltimaAlteracao;
 
     @Column(nullable = false)
-    private Integer estado;   // 1 - ativo, 2 - inativo
+    private Integer estado;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_usuario_id", nullable = false)
     private TipoUsuario tipoUsuario;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;
 }

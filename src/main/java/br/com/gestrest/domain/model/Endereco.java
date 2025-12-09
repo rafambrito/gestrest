@@ -6,11 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
 @Table(name = "endereco")
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Endereco {
 
     @Id
@@ -18,15 +21,13 @@ public class Endereco {
     @Column(name = "endereco_id")
     private Long id;
 
-    @Column(name = "rua")
     private String rua;
 
-    @Column(name = "numero")
     private Integer numero;
 
-    @Column(name = "cidade", nullable = false)
+    @Column(nullable = false, length = 60)
     private String cidade;
 
-    @Column(name = "cep", nullable = false)
+    @Column(nullable = false, length = 12)
     private String cep;
 }

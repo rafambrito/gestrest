@@ -10,23 +10,25 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "item_pedido")
-@Getter @Setter
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class ItemPedido {
 
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @MapsId("pedidoId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumns({
         @JoinColumn(name = "item_cardapio_id", referencedColumnName = "item_cardapio_id", insertable = false, updatable = false),
         @JoinColumn(name = "restaurante_id", referencedColumnName = "restaurante_id", insertable = false, updatable = false)
