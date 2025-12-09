@@ -1,4 +1,4 @@
-package model;
+package br.com.gestrest.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,18 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-
-@Entity
-@Table(name = "restaurante")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "restaurante", schema = "gestrest")
 public class Restaurante {
 
     @Id
@@ -35,4 +31,11 @@ public class Restaurante {
     @ManyToOne
     @JoinColumn(name = "proprietario", nullable = false)
     private Usuario proprietario;
+
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "avaliacao_id", referencedColumnName = "avaliacao_id"),
+        @JoinColumn(name = "avaliacao_usuario_id", referencedColumnName = "usuario_id")
+    })
+    private Avaliacao avaliacao;
 }

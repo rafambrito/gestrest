@@ -1,4 +1,4 @@
-package model;
+package br.com.gestrest.domain.model;
 
 import java.time.LocalDateTime;
 
@@ -10,31 +10,32 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "avaliacao")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Avaliacao {
+@Entity
+@Table(name = "pedido", schema = "gestrest")
+public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "avaliacao_id")
+    @Column(name = "pedido_id")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    private String comentario;
+    @ManyToOne
+    @JoinColumn(name = "restaurante_id", nullable = false)
+    private Restaurante restaurante;
 
-    @Column(nullable = false)
+    @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 
-    @Column(name = "qtde_estrelas", nullable = false)
-    private Integer qtdeEstrelas;
+    @Column(name = "status", nullable = false)
+    private String status;
+
+    @Column(name = "valor_total")
+    private Double valorTotal;
 }
