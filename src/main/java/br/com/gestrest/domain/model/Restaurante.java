@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "restaurante")
+@Table(name = "restaurante", schema="gestrest")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Restaurante {
 

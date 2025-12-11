@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "item_cardapio")
+@Table(name = "item_cardapio", schema="gestrest")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class ItemCardapio {
 

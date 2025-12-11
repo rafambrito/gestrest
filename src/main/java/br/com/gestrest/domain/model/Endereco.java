@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "endereco")
+@Table(name = "endereco", schema="gestrest")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Endereco {
 

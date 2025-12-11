@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tipo_usuario")
+@Table(name = "tipo_usuario", schema="gestrest")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class TipoUsuario {
 
