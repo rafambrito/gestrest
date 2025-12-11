@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,11 +15,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "restaurante", schema = "gestrest")
+@Table(name = "restaurante")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Restaurante {
 
-    @Id
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurante_id")
     private Long id;
@@ -37,9 +36,6 @@ public class Restaurante {
     private Usuario proprietario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-        @JoinColumn(name = "avaliacao_id", referencedColumnName = "avaliacao_id"),
-        @JoinColumn(name = "avaliacao_usuario_id", referencedColumnName = "usuario_id")
-    })
+    @JoinColumn(name = "avaliacao_id")
     private Avaliacao avaliacao;
 }

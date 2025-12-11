@@ -20,7 +20,7 @@ public class Cardapio {
 
     @Id
     @Column(name = "restaurante_id")
-    private Long restauranteId; 
+    private Long restauranteId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId

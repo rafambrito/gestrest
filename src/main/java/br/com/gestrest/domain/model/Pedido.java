@@ -17,12 +17,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "pedido", schema = "gestrest")
+@Table(name = "pedido")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Pedido {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pedido_id")
     private Long id;
 

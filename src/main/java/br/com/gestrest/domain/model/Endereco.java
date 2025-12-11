@@ -16,13 +16,12 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Endereco {
 
-    @Id
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "endereco_id")
     private Long id;
 
     private String rua;
-
     private Integer numero;
 
     @Column(nullable = false, length = 60)
