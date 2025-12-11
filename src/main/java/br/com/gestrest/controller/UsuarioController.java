@@ -73,10 +73,4 @@ public class UsuarioController implements UsuarioControllerDoc {
     public ResponseEntity<List<UsuarioResponseDTO>> buscarPorNome(@RequestParam String nome) {
         return ResponseEntity.ok(service.buscarPorNome(nome));
     }
-
-    @Override
-    @PostMapping("/login")
-    public ResponseEntity<UsuarioResponseDTO> login(@RequestParam String login, @RequestParam String senha) {
-        return ResponseEntity.ok(service.login(login, senha));
-    }
 }

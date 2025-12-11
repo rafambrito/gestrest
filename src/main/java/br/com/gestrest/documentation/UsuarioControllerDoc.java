@@ -40,8 +40,4 @@ public interface UsuarioControllerDoc {
     @Operation(summary = "Buscar usuários por nome")
     ResponseEntity<List<UsuarioResponseDTO>> buscarPorNome(String nome);
 
-    @Operation(summary = "Login")
-    @ApiResponse(responseCode = "400", description = "Credenciais inválidas", content = @Content)
-    ResponseEntity<UsuarioResponseDTO> login(String login, String senha);
-
 }
