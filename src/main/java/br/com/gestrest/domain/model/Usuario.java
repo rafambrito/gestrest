@@ -2,6 +2,7 @@ package br.com.gestrest.domain.model;
 
 import java.time.LocalDateTime;
 
+import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "usuario", schema="gestrest")
+@Table(name = "usuario")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Usuario {
 
@@ -51,4 +52,19 @@ public class Usuario {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;
+    
+    public void atualizarDados(UsuarioRequestDTO dto) {
+        this.nome = dto.getNome();
+        this.email = dto.getEmail();
+        this.login = dto.getLogin();
+        this.estado = dto.getEstado();
+    }
+
+    public void alterarSenha(String novaSenha) {
+        this.senha = novaSenha;
+    }
+
+    public void atualizarDataAlteracao() {
+        this.dataUltimaAlteracao = LocalDateTime.now();
+    }
 }

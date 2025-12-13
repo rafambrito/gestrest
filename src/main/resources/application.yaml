@@ -18,7 +18,7 @@ spring:
 
   mvc:
     problemdetails:
-      enabled: true  # ativa respostas RFC 7807
+      enabled: true
 
 server:
   port: 8080
@@ -30,7 +30,6 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
-# OpenAPI/Swagger (Springdoc)
 springdoc:
   api-docs:
     path: /v3/api-docs
@@ -39,6 +38,5 @@ springdoc:
 
 gestrest:
   jwt:
-    # chave de exemplo - troque por uma string aleatória longa em produção
     secret: "gestrest-super-secret-key-32-chars-minimo-123"
     expiration-minutes: 60

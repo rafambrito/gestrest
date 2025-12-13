@@ -1,4 +1,4 @@
-package br.com.gestrest.dto;
+package br.com.gestrest.dto.mapper;
 
 import org.springframework.stereotype.Component;
 

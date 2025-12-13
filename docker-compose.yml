@@ -10,14 +10,14 @@ services:
       POSTGRES_DB: gestrest
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - fiap
     ports:
       - "5432:5432"
+    networks:
+      - fiap
 
   app:
     build: .
-    image: dttpaula/grupo16-1techchallenge:1.0
+    image: gestrest/api:1.0.0
     container_name: api_fiap
     depends_on:
       - postgres
@@ -34,7 +34,6 @@ services:
 
 networks:
   fiap:
-    external: true   # Usa a rede 'fiap' já criada manualmente
 
 volumes:
   postgres_data:
