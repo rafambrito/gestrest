@@ -12,7 +12,7 @@ public class TipoUsuarioService {
 	
 	private final TipoUsuarioRepository tipoUsuarioRepository;
 	
-	public TipoUsuario salvar(TipoUsuario tipoUsuario) {
+	public TipoUsuario criar(TipoUsuario tipoUsuario) {
 		return tipoUsuarioRepository.save(tipoUsuario);
 	}
 	
