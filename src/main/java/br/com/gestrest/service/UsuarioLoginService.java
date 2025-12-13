@@ -13,13 +13,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioLoginService {
 
-    private final UsuarioRepository usuarioRepository;
-    private final UsuarioMapper mapper;
+	private final UsuarioRepository usuarioRepository;
+	private final UsuarioMapper mapper;
 
-    public UsuarioResponseDTO login(String login, String senha) {
-        Usuario usuario = usuarioRepository.findByLoginAndSenha(login, senha)
-                .orElseThrow(() -> new NegocioException("Login ou senha inválidos"));
+	public UsuarioResponseDTO login(String login, String senha) {
+		Usuario usuario = usuarioRepository.findByLoginAndSenha(login, senha)
+				.orElseThrow(() -> new NegocioException("Login ou senha inválidos"));
 
-        return mapper.toResponse(usuario);
-    }
+		return mapper.toResponse(usuario);
+	}
 }

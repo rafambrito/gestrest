@@ -23,38 +23,33 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TipoUsuarioController implements TipoUsuarioControllerDoc {
 
-    private final TipoUsuarioService service;
+	private final TipoUsuarioService service;
 
-    @Override
-    @PostMapping
-    public ResponseEntity<TipoUsuarioResponseDTO> criar(
-            @RequestBody TipoUsuarioRequestDTO dto) {
+	@Override
+	@PostMapping
+	public ResponseEntity<TipoUsuarioResponseDTO> criar(@RequestBody TipoUsuarioRequestDTO dto) {
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(service.criar(dto));
-    }
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(dto));
+	}
 
-    @Override
-    @GetMapping
-    public ResponseEntity<List<TipoUsuarioResponseDTO>> listarTodos() {
-        return ResponseEntity.ok(service.listarTodos());
-    }
+	@Override
+	@GetMapping
+	public ResponseEntity<List<TipoUsuarioResponseDTO>> listarTodos() {
+		return ResponseEntity.ok(service.listarTodos());
+	}
 
-    @Override
-    @GetMapping("/{id}")
-    public ResponseEntity<TipoUsuarioResponseDTO> buscarPorId(
-            @PathVariable Long id) {
+	@Override
+	@GetMapping("/{id}")
+	public ResponseEntity<TipoUsuarioResponseDTO> buscarPorId(@PathVariable Long id) {
 
-        return ResponseEntity.ok(service.buscarPorId(id));
-    }
+		return ResponseEntity.ok(service.buscarPorId(id));
+	}
 
-    @Override
-    @PutMapping("/{id}")
-    public ResponseEntity<TipoUsuarioResponseDTO> atualizar(
-            @PathVariable Long id,
-            @RequestBody TipoUsuarioRequestDTO dto) {
+	@Override
+	@PutMapping("/{id}")
+	public ResponseEntity<TipoUsuarioResponseDTO> atualizar(@PathVariable Long id,
+			@RequestBody TipoUsuarioRequestDTO dto) {
 
-        return ResponseEntity.ok(service.atualizar(id, dto));
-    }
+		return ResponseEntity.ok(service.atualizar(id, dto));
+	}
 }

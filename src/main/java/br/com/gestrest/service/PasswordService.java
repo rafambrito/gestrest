@@ -16,14 +16,14 @@ public class PasswordService {
 
 	private final UsuarioRepository usuarioRepository;
 	private final PasswordEncoder passwordEncoder;
-	
-    @Transactional
-    public void alterarSenha(Long id, UsuarioSenhaRequestDTO dto) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
 
-        usuario.setSenha(passwordEncoder.encode(dto.getNovaSenha()));
+	@Transactional
+	public void alterarSenha(Long id, UsuarioSenhaRequestDTO dto) {
+		Usuario usuario = usuarioRepository.findById(id)
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
 
-        usuarioRepository.save(usuario);
-    }
+		usuario.setSenha(passwordEncoder.encode(dto.getNovaSenha()));
+
+		usuarioRepository.save(usuario);
+	}
 }

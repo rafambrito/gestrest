@@ -15,22 +15,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TipoUsuarioConsultaService {
 
-    private final TipoUsuarioRepository repository;
-    private final TipoUsuarioMapper mapper;
+	private final TipoUsuarioRepository repository;
+	private final TipoUsuarioMapper mapper;
 
-    public List<TipoUsuarioResponseDTO> listarTodos() {
-        return repository.findAll()
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
+	public List<TipoUsuarioResponseDTO> listarTodos() {
+		return repository.findAll().stream().map(mapper::toResponse).toList();
+	}
 
-    public TipoUsuarioResponseDTO buscarPorId(Long id) {
-        TipoUsuario tipoUsuario = repository.findById(id)
-                .orElseThrow(() ->
-                        new RecursoNaoEncontradoException(
-                                "Tipo de Usuário não encontrado com id: " + id));
+	public TipoUsuarioResponseDTO buscarPorId(Long id) {
+		TipoUsuario tipoUsuario = repository.findById(id)
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Tipo de Usuário não encontrado com id: " + id));
 
-        return mapper.toResponse(tipoUsuario);
-    }
+		return mapper.toResponse(tipoUsuario);
+	}
 }

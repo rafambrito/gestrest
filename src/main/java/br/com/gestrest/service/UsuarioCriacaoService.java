@@ -15,17 +15,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioCriacaoService {
 
-    private final UsuarioRepository usuarioRepository;
-    private final UsuarioMapper mapper;
-    private final EmailUnicoValidator emailUnicoValidator;
+	private final UsuarioRepository usuarioRepository;
+	private final UsuarioMapper mapper;
+	private final EmailUnicoValidator emailUnicoValidator;
 
-    @Transactional
-    public UsuarioResponseDTO criar(UsuarioRequestDTO dto) {
-        emailUnicoValidator.validar(dto.getEmail());
+	@Transactional
+	public UsuarioResponseDTO criar(UsuarioRequestDTO dto) {
+		emailUnicoValidator.validar(dto.getEmail());
 
-        Usuario usuario = mapper.toEntity(dto);
-        usuario.atualizarDataAlteracao();
+		Usuario usuario = mapper.toEntity(dto);
+		usuario.atualizarDataAlteracao();
 
-        return mapper.toResponse(usuarioRepository.save(usuario));
-    }
+		return mapper.toResponse(usuarioRepository.save(usuario));
+	}
 }

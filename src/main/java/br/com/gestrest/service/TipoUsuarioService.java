@@ -12,24 +12,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TipoUsuarioService {
 
-    private final TipoUsuarioCriacaoService criacaoService;
-    private final TipoUsuarioConsultaService consultaService;
-    private final TipoUsuarioAtualizacaoService atualizacaoService;
+	private final TipoUsuarioCriacaoService criacaoService;
+	private final TipoUsuarioConsultaService consultaService;
+	private final TipoUsuarioAtualizacaoService atualizacaoService;
 
-    public TipoUsuarioResponseDTO criar(TipoUsuarioRequestDTO dto) {
-        return criacaoService.criar(dto);
-    }
+	public TipoUsuarioResponseDTO criar(TipoUsuarioRequestDTO dto) {
+		return criacaoService.criar(dto);
+	}
 
-    public List<TipoUsuarioResponseDTO> listarTodos() {
-        return consultaService.listarTodos();
-    }
+	public List<TipoUsuarioResponseDTO> listarTodos() {
+		return consultaService.listarTodos();
+	}
 
-    public TipoUsuarioResponseDTO buscarPorId(Long id) {
-        return consultaService.buscarPorId(id);
-    }
+	public TipoUsuarioResponseDTO buscarPorId(Long id) {
+		return consultaService.buscarPorId(id);
+	}
 
-    public TipoUsuarioResponseDTO atualizar(Long id, TipoUsuarioRequestDTO dto) {
-        return atualizacaoService.atualizar(id, dto);
-    }
+	public TipoUsuarioResponseDTO atualizar(Long id, TipoUsuarioRequestDTO dto) {
+		return atualizacaoService.atualizar(id, dto);
+	}
 }
-

@@ -13,17 +13,16 @@ import br.com.gestrest.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController implements AuthControllerDoc {
 
-    private final AuthService authService;
+	private final AuthService authService;
 
-    @Override
-    @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody AuthRequestDTO dto) {
-        return ResponseEntity.ok(authService.autenticar(dto));
-    }
+	@Override
+	@PostMapping("/login")
+	public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody AuthRequestDTO dto) {
+		return ResponseEntity.ok(authService.autenticar(dto));
+	}
 }

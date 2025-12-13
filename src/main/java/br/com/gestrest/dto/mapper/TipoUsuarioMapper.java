@@ -8,16 +8,16 @@ import br.com.gestrest.dto.response.TipoUsuarioResponseDTO;
 
 @Component
 public class TipoUsuarioMapper {
-    public TipoUsuario toEntity(TipoUsuarioRequestDTO dto) {
-        TipoUsuario entity = new TipoUsuario();
-        entity.setNome(dto.getNome());
-        return entity;
-    }
-    
+	public TipoUsuario toEntity(TipoUsuarioRequestDTO dto) {
+		TipoUsuario entity = new TipoUsuario();
+		entity.setNome(dto.getNome());
+		return entity;
+	}
+
 	public TipoUsuarioResponseDTO toResponse(TipoUsuario entity) {
-        TipoUsuarioResponseDTO dto = new TipoUsuarioResponseDTO();
-        dto.setId(entity.getId());
-        dto.setNome(entity.getNome());
-        return dto;
-    }
+		TipoUsuarioResponseDTO dto = new TipoUsuarioResponseDTO();
+		dto.setId(entity.getId());
+		dto.setNome(entity.getNome());
+		return dto;
+	}
 }

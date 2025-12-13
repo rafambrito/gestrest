@@ -15,27 +15,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioConsultaService {
 
-    private final UsuarioRepository usuarioRepository;
-    private final UsuarioMapper mapper;
+	private final UsuarioRepository usuarioRepository;
+	private final UsuarioMapper mapper;
 
-    public UsuarioResponseDTO buscarPorId(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() ->
-                        new RecursoNaoEncontradoException("Usuário não encontrado com id: " + id));
-        return mapper.toResponse(usuario);
-    }
+	public UsuarioResponseDTO buscarPorId(Long id) {
+		Usuario usuario = usuarioRepository.findById(id)
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com id: " + id));
+		return mapper.toResponse(usuario);
+	}
 
-    public List<UsuarioResponseDTO> listarTodos() {
-        return usuarioRepository.findAll()
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
+	public List<UsuarioResponseDTO> listarTodos() {
+		return usuarioRepository.findAll().stream().map(mapper::toResponse).toList();
+	}
 
-    public List<UsuarioResponseDTO> buscarPorNome(String nome) {
-        return usuarioRepository.findByNomeContainingIgnoreCase(nome)
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
+	public List<UsuarioResponseDTO> buscarPorNome(String nome) {
+		return usuarioRepository.findByNomeContainingIgnoreCase(nome).stream().map(mapper::toResponse).toList();
+	}
 }

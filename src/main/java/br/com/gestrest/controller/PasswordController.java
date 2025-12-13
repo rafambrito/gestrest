@@ -18,21 +18,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PasswordController implements PasswordControllerDoc {
 
-    private final PasswordService passwordService;
+	private final PasswordService passwordService;
 
-    @Override
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> alterarSenha(
-            @PathVariable Long id,
-            @Valid @RequestBody UsuarioSenhaRequestDTO dto) {
+	@Override
+	@PatchMapping("/{id}")
+	public ResponseEntity<Void> alterarSenha(@PathVariable Long id, @Valid @RequestBody UsuarioSenhaRequestDTO dto) {
 
-        passwordService.alterarSenha(id, dto);
-        return ResponseEntity.noContent().build();
-    }
+		passwordService.alterarSenha(id, dto);
+		return ResponseEntity.noContent().build();
+	}
 }
-
-
-
-
-
-

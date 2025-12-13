@@ -13,19 +13,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioSenhaService {
 
-    private final UsuarioRepository usuarioRepository;
+	private final UsuarioRepository usuarioRepository;
 
-    @Transactional
-    public void alterarSenha(Long id, UsuarioSenhaRequestDTO dto) {
-        Usuario usuario = obterUsuario(id);
-        usuario.alterarSenha(dto.getNovaSenha());
-        usuario.atualizarDataAlteracao();
-        usuarioRepository.save(usuario);
-    }
+	@Transactional
+	public void alterarSenha(Long id, UsuarioSenhaRequestDTO dto) {
+		Usuario usuario = obterUsuario(id);
+		usuario.alterarSenha(dto.getNovaSenha());
+		usuario.atualizarDataAlteracao();
+		usuarioRepository.save(usuario);
+	}
 
-    private Usuario obterUsuario(Long id) {
-        return usuarioRepository.findById(id)
-                .orElseThrow(() ->
-                        new RecursoNaoEncontradoException("Usuário não encontrado"));
-    }
+	private Usuario obterUsuario(Long id) {
+		return usuarioRepository.findById(id)
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
+	}
 }

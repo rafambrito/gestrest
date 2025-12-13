@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class UsuarioSenhaRequestDTO {
-    @NotBlank
-    private String novaSenha;
+	@NotBlank
+	private String novaSenha;
 }

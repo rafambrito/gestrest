@@ -16,27 +16,26 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioAtualizacaoService {
 
-    private final UsuarioRepository usuarioRepository;
-    private final EmailUnicoValidator emailUnicoValidator;
-    private final UsuarioMapper mapper;
+	private final UsuarioRepository usuarioRepository;
+	private final EmailUnicoValidator emailUnicoValidator;
+	private final UsuarioMapper mapper;
 
-    @Transactional
-    public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto) {
-        Usuario usuario = obterUsuario(id);
+	@Transactional
+	public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto) {
+		Usuario usuario = obterUsuario(id);
 
-        if (!usuario.getEmail().equals(dto.getEmail())) {
-            emailUnicoValidator.validar(dto.getEmail());
-        }
+		if (!usuario.getEmail().equals(dto.getEmail())) {
+			emailUnicoValidator.validar(dto.getEmail());
+		}
 
-        usuario.atualizarDados(dto);
-        usuario.atualizarDataAlteracao();
+		usuario.atualizarDados(dto);
+		usuario.atualizarDataAlteracao();
 
-        return mapper.toResponse(usuarioRepository.save(usuario));
-    }
+		return mapper.toResponse(usuarioRepository.save(usuario));
+	}
 
-    private Usuario obterUsuario(Long id) {
-        return usuarioRepository.findById(id)
-                .orElseThrow(() ->
-                        new RecursoNaoEncontradoException("Usuário não encontrado com id: " + id));
-    }
+	private Usuario obterUsuario(Long id) {
+		return usuarioRepository.findById(id)
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com id: " + id));
+	}
 }

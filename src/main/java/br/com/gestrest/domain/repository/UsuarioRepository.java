@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.gestrest.domain.model.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-    boolean existsByEmail(String email);
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+	boolean existsByEmail(String email);
 
-    // Login simples (antes de implementar segurança com password hash)
-    Optional<Usuario> findByLoginAndSenha(String login, String senha);
+	// Login simples (antes de implementar segurança com password hash)
+	Optional<Usuario> findByLoginAndSenha(String login, String senha);
 
-    List<Usuario> findByNomeContainingIgnoreCase(String nome);
-    
-    Optional<Usuario> findByLogin(String login);
+	List<Usuario> findByNomeContainingIgnoreCase(String nome);
+
+	Optional<Usuario> findByLogin(String login);
 }

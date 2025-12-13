@@ -23,65 +23,51 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;   
-    private final JwtTokenProvider jwtTokenProvider;       
+	private final UserDetailsService userDetailsService;
+	private final JwtTokenProvider jwtTokenProvider;
 
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+		return config.getAuthenticationManager();
+	}
 
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		AuthenticationManager authManager = authenticationManager(
+				http.getSharedObject(AuthenticationConfiguration.class));
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
+		JwtAuthenticationFilter jwtFilter = new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService);
 
+		http.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(corsConfigurationSource()))
+				.sessionManagement(
+						sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(auth -> auth
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        AuthenticationManager authManager = authenticationManager(
-                http.getSharedObject(AuthenticationConfiguration.class)
-        );
-        
-        JwtAuthenticationFilter jwtFilter =
-                new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService);
+						.requestMatchers("/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
+								"/api/v1/**")
+						.permitAll().anyRequest().authenticated())
+				.authenticationManager(authManager).userDetailsService(userDetailsService)
+				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
-        http
-            .csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
+		return http.build();
+	}
 
-                .requestMatchers(
-                        "/api/auth/**",            
-                        "/v3/api-docs/**",          
-                        "/swagger-ui/**",
-                        "/swagger-ui.html",
-                        "/api/v1/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-            )
-            .authenticationManager(authManager) 
-            .userDetailsService(userDetailsService)
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration config = new CorsConfiguration();
+		config.addAllowedOriginPattern("*");
+		config.addAllowedMethod("*");
+		config.addAllowedHeader("*");
+		config.setAllowCredentials(true);
 
-        return http.build();
-    }
-    
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOriginPattern("*");
-        config.addAllowedMethod("*");
-        config.addAllowedHeader("*");
-        config.setAllowCredentials(true);
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+		return source;
+	}
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
-    
 }
-

@@ -14,12 +14,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TipoUsuarioCriacaoService {
 
-    private final TipoUsuarioRepository repository;
-    private final TipoUsuarioMapper mapper;
+	private final TipoUsuarioRepository repository;
+	private final TipoUsuarioMapper mapper;
 
-    @Transactional
-    public TipoUsuarioResponseDTO criar(TipoUsuarioRequestDTO dto) {
-        TipoUsuario tipoUsuario = mapper.toEntity(dto);
-        return mapper.toResponse(repository.save(tipoUsuario));
-    }
+	@Transactional
+	public TipoUsuarioResponseDTO criar(TipoUsuarioRequestDTO dto) {
+		TipoUsuario tipoUsuario = mapper.toEntity(dto);
+		return mapper.toResponse(repository.save(tipoUsuario));
+	}
 }

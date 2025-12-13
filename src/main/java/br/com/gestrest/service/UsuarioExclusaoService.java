@@ -12,14 +12,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioExclusaoService {
 
-    private final UsuarioRepository usuarioRepository;
+	private final UsuarioRepository usuarioRepository;
 
-    @Transactional
-    public void excluir(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() ->
-                        new RecursoNaoEncontradoException("Usuário não encontrado com id: " + id));
+	@Transactional
+	public void excluir(Long id) {
+		Usuario usuario = usuarioRepository.findById(id)
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com id: " + id));
 
-        usuarioRepository.delete(usuario);
-    }
+		usuarioRepository.delete(usuario);
+	}
 }

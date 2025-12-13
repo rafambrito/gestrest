@@ -28,49 +28,50 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioController implements UsuarioControllerDoc {
 
-    private final UsuarioService service;
+	private final UsuarioService service;
 
-    @Override
-    @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> criar(@RequestBody @Valid UsuarioRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(dto));
-    }
+	@Override
+	@PostMapping
+	public ResponseEntity<UsuarioResponseDTO> criar(@RequestBody @Valid UsuarioRequestDTO dto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(dto));
+	}
 
-    @Override
-    @GetMapping
-    public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
-        return ResponseEntity.ok(service.listarTodos());
-    }
+	@Override
+	@GetMapping
+	public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
+		return ResponseEntity.ok(service.listarTodos());
+	}
 
-    @Override
-    @GetMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarPorId(id));
-    }
+	@Override
+	@GetMapping("/{id}")
+	public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable Long id) {
+		return ResponseEntity.ok(service.buscarPorId(id));
+	}
 
-    @Override
-    @PutMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioRequestDTO dto) {
-        return ResponseEntity.ok(service.atualizar(id, dto));
-    }
+	@Override
+	@PutMapping("/{id}")
+	public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable Long id,
+			@RequestBody @Valid UsuarioRequestDTO dto) {
+		return ResponseEntity.ok(service.atualizar(id, dto));
+	}
 
-    @Override
-    @PatchMapping("/{id}/senha")
-    public ResponseEntity<Void> alterarSenha(@PathVariable Long id, @RequestBody @Valid UsuarioSenhaRequestDTO dto) {
-        service.alterarSenha(id, dto);
-        return ResponseEntity.noContent().build();
-    }
+	@Override
+	@PatchMapping("/{id}/senha")
+	public ResponseEntity<Void> alterarSenha(@PathVariable Long id, @RequestBody @Valid UsuarioSenhaRequestDTO dto) {
+		service.alterarSenha(id, dto);
+		return ResponseEntity.noContent().build();
+	}
 
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Long id) {
-        service.excluir(id);
-        return ResponseEntity.noContent().build();
-    }
+	@Override
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> excluir(@PathVariable Long id) {
+		service.excluir(id);
+		return ResponseEntity.noContent().build();
+	}
 
-    @Override
-    @GetMapping("/buscar")
-    public ResponseEntity<List<UsuarioResponseDTO>> buscarPorNome(@RequestParam String nome) {
-        return ResponseEntity.ok(service.buscarPorNome(nome));
-    }
+	@Override
+	@GetMapping("/buscar")
+	public ResponseEntity<List<UsuarioResponseDTO>> buscarPorNome(@RequestParam String nome) {
+		return ResponseEntity.ok(service.buscarPorNome(nome));
+	}
 }

@@ -14,18 +14,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtTokenProvider;
+	private final AuthenticationManager authenticationManager;
+	private final JwtTokenProvider jwtTokenProvider;
 
-    public AuthResponseDTO autenticar(AuthRequestDTO dto) {
+	public AuthResponseDTO autenticar(AuthRequestDTO dto) {
 
-        // Autentica usuário usando UserDetailsService + BCrypt internamente
-        Authentication autenticado = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(dto.getLogin(), dto.getSenha())
-        );
+		// Autentica usuário usando UserDetailsService + BCrypt internamente
+		Authentication autenticado = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(dto.getLogin(), dto.getSenha()));
 
-        String token = jwtTokenProvider.generateToken(autenticado.getName());
+		String token = jwtTokenProvider.generateToken(autenticado.getName());
 
-        return new AuthResponseDTO(token); 
-    }
+		return new AuthResponseDTO(token);
+	}
 }
