@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gestrest.documentation.UsuarioControllerDoc;
+import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import br.com.gestrest.dto.request.UsuarioSenhaRequestDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
@@ -32,7 +33,7 @@ public class UsuarioController implements UsuarioControllerDoc {
 
 	@Override
 	@PostMapping
-	public ResponseEntity<UsuarioResponseDTO> criar(@RequestBody @Valid UsuarioRequestDTO dto) {
+	public ResponseEntity<UsuarioResponseDTO> criar(@RequestBody @Valid UsuarioRequestCadastroDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(dto));
 	}
 

@@ -2,6 +2,8 @@ package br.com.gestrest.domain.model;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ForeignKey;
+
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +35,7 @@ public class Usuario {
     @Column(nullable = false, unique = true, length = 120)
     private String email;
 
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, unique = true, length = 45)
     private String login;
 
     @Column(nullable = false)

@@ -5,8 +5,10 @@ import org.springframework.stereotype.Component;
 import br.com.gestrest.domain.model.Endereco;
 import br.com.gestrest.domain.model.TipoUsuario;
 import br.com.gestrest.domain.model.Usuario;
+import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
+import br.com.gestrest.enums.UsuarioEstadoEnum;
 
 @Component
 public class UsuarioMapper {
@@ -18,6 +20,25 @@ public class UsuarioMapper {
 		usuario.setLogin(dto.getLogin());
 		usuario.setSenha(dto.getSenha());
 		usuario.setEstado(dto.getEstado());
+
+		TipoUsuario tipo = new TipoUsuario();
+		tipo.setId(dto.getTipoUsuarioId());
+		usuario.setTipoUsuario(tipo);
+
+		Endereco end = new Endereco();
+		end.setId(dto.getEnderecoId());
+		usuario.setEndereco(end);
+
+		return usuario;
+	}
+	
+	public Usuario toEntityCadastro(UsuarioRequestCadastroDTO dto) {
+		Usuario usuario = new Usuario();
+		usuario.setNome(dto.getNome());
+		usuario.setEmail(dto.getEmail());
+		usuario.setLogin(dto.getLogin());
+		usuario.setSenha(dto.getSenha());
+		usuario.setEstado(UsuarioEstadoEnum.ATIVO.getCodigoEstadoUsuario());
 
 		TipoUsuario tipo = new TipoUsuario();
 		tipo.setId(dto.getTipoUsuarioId());

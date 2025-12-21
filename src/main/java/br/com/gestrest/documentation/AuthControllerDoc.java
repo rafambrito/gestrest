@@ -18,10 +18,12 @@ public interface AuthControllerDoc {
 
 	@Operation(summary = "Realizar login", description = "Valida credenciais e retorna informações do usuário autenticado.")
 	@ApiResponses({
-			@ApiResponse(responseCode = "200", description = "Autenticação realizada com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AuthResponseDTO.class), examples = {
+			@ApiResponse(responseCode = "200", description = "Autenticação realizada com sucesso", 
+					content = @Content(mediaType = "application/json", 
+					schema = @Schema(implementation = AuthResponseDTO.class), 
+					examples = {
 					@ExampleObject(name = "Login com sucesso", value = """
 							{
-							  "id": 1,
 							  "nome": "Rafael Brito",
 							  "email": "rafael@email.com",
 							  "tipoUsuario": "CLIENTE",
@@ -31,7 +33,10 @@ public interface AuthControllerDoc {
 			@ApiResponse(responseCode = "400", description = "Credenciais inválidas") })
 	ResponseEntity<AuthResponseDTO> login(
 
-			@RequestBody(required = true, description = "Credenciais de acesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AuthRequestDTO.class), examples = {
+			@RequestBody(required = true, description = "Credenciais de acesso", 
+				content = @Content(mediaType = "application/json", 
+				schema = @Schema(implementation = AuthRequestDTO.class), 
+				examples = {
 					@ExampleObject(name = "Exemplo de Login", value = """
 							{
 							  "login": "rafaelb",

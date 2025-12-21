@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import br.com.gestrest.dto.request.UsuarioSenhaRequestDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
@@ -23,17 +24,19 @@ public interface UsuarioControllerDoc {
 	@ApiResponse(responseCode = "201", description = "Usuário criado com sucesso")
 	ResponseEntity<UsuarioResponseDTO> criar(
 
-			@RequestBody(description = "Dados para criação de um novo usuário", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioRequestDTO.class), examples = @ExampleObject(name = "Exemplo de criação de usuário", value = """
+			@RequestBody(description = "Dados para criação de um novo usuário", 
+				required = true, content = @Content(mediaType = "application/json", 
+				schema = @Schema(implementation = UsuarioRequestCadastroDTO.class), 
+				examples = @ExampleObject(name = "Exemplo de criação de usuário", value = """
 					    {
 					      "nome": "Rafael Brito",
 					      "email": "rafael@email.com",
 					      "login": "rafaelb",
 					      "senha": "123456",
-					      "estado": 1,
 					      "tipoUsuarioId": 2,
 					      "enderecoId": 5
 					    }
-					"""))) UsuarioRequestDTO dto);
+					"""))) UsuarioRequestCadastroDTO dto);
 
 	@Operation(summary = "Listar todos os usuários")
 	ResponseEntity<List<UsuarioResponseDTO>> listarTodos();
@@ -46,7 +49,8 @@ public interface UsuarioControllerDoc {
 
 			@Parameter(description = "ID do usuário", example = "1") Long id,
 
-			@RequestBody(content = @Content(schema = @Schema(implementation = UsuarioRequestDTO.class), examples = @ExampleObject(name = "Exemplo de atualização de usuário", value = """
+			@RequestBody(content = @Content(schema = @Schema(implementation = UsuarioRequestDTO.class), 
+				examples = @ExampleObject(name = "Exemplo de atualização de usuário", value = """
 					    {
 					      "nome": "João Atualizado",
 					      "email": "joao@dominio.com",
@@ -60,9 +64,9 @@ public interface UsuarioControllerDoc {
 	@Operation(summary = "Alterar senha")
 	ResponseEntity<Void> alterarSenha(@Parameter(description = "ID do usuário", example = "1") Long id,
 
-			@RequestBody(content = @Content(schema = @Schema(implementation = UsuarioSenhaRequestDTO.class), examples = @ExampleObject(name = "Exemplo alterar senha", value = """
+			@RequestBody(content = @Content(schema = @Schema(implementation = UsuarioSenhaRequestDTO.class), 
+			examples = @ExampleObject(name = "Exemplo alterar senha", value = """
 					    {
-					      "senhaAtual": "123456",
 					      "novaSenha": "999999"
 					    }
 					"""))) UsuarioSenhaRequestDTO dto);

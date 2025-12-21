@@ -31,7 +31,7 @@ public class ItemCardapio {
     @Column(name = "descricao", nullable = false, length = 45)
     private String descricao;
 
-    @Column(name = "ingredientes", length = 45)
+    @Column(name = "ingredientes", length = 255)
     private String ingredientes;
 
     @Column(name = "valor", nullable = false)

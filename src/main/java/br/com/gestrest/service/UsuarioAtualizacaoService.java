@@ -7,8 +7,11 @@ import br.com.gestrest.domain.repository.UsuarioRepository;
 import br.com.gestrest.dto.mapper.UsuarioMapper;
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
+import br.com.gestrest.enums.TipoUsuarioEnum;
+import br.com.gestrest.enums.UsuarioEstadoEnum;
 import br.com.gestrest.exception.RecursoNaoEncontradoException;
 import br.com.gestrest.service.validator.EmailUnicoValidator;
+import br.com.gestrest.service.validator.EnderecoCadastradoValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +21,7 @@ public class UsuarioAtualizacaoService {
 
 	private final UsuarioRepository usuarioRepository;
 	private final EmailUnicoValidator emailUnicoValidator;
+	private final EnderecoCadastradoValidator enderecoCadastradoValidator;
 	private final UsuarioMapper mapper;
 
 	@Transactional
@@ -27,7 +31,15 @@ public class UsuarioAtualizacaoService {
 		if (!usuario.getEmail().equals(dto.getEmail())) {
 			emailUnicoValidator.validar(dto.getEmail());
 		}
-
+		enderecoCadastradoValidator.validar(dto.getEnderecoId());
+		
+		if (UsuarioEstadoEnum.getDescricaoEstadoByCodigo(dto.getEstado()) == null) {
+			throw new RecursoNaoEncontradoException("Estado de usuário inválido.");
+		}
+		
+		if (TipoUsuarioEnum.getDescricaoTipoByCodigo(dto.getTipoUsuarioId()) == null) {
+			throw new RecursoNaoEncontradoException("Tipo Usuário inválido.");
+		}
 		usuario.atualizarDados(dto);
 		usuario.atualizarDataAlteracao();
 

@@ -1,13 +1,15 @@
 package br.com.gestrest.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.gestrest.domain.model.Usuario;
 import br.com.gestrest.domain.repository.UsuarioRepository;
 import br.com.gestrest.dto.mapper.UsuarioMapper;
-import br.com.gestrest.dto.request.UsuarioRequestDTO;
+import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
 import br.com.gestrest.service.validator.EmailUnicoValidator;
+import br.com.gestrest.service.validator.LoginUnicoValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -18,12 +20,16 @@ public class UsuarioCriacaoService {
 	private final UsuarioRepository usuarioRepository;
 	private final UsuarioMapper mapper;
 	private final EmailUnicoValidator emailUnicoValidator;
+	private final PasswordEncoder passwordEncoder;
+	private final LoginUnicoValidator loginUnicoValidator;
 
 	@Transactional
-	public UsuarioResponseDTO criar(UsuarioRequestDTO dto) {
+	public UsuarioResponseDTO criar(UsuarioRequestCadastroDTO dto) {
 		emailUnicoValidator.validar(dto.getEmail());
-
-		Usuario usuario = mapper.toEntity(dto);
+		loginUnicoValidator.validar(dto.getLogin());
+		
+		Usuario usuario = mapper.toEntityCadastro(dto);
+		usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
 		usuario.atualizarDataAlteracao();
 
 		return mapper.toResponse(usuarioRepository.save(usuario));

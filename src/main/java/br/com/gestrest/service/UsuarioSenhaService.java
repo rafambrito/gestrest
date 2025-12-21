@@ -1,5 +1,6 @@
 package br.com.gestrest.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.gestrest.domain.model.Usuario;
@@ -14,11 +15,12 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioSenhaService {
 
 	private final UsuarioRepository usuarioRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	@Transactional
 	public void alterarSenha(Long id, UsuarioSenhaRequestDTO dto) {
 		Usuario usuario = obterUsuario(id);
-		usuario.alterarSenha(dto.getNovaSenha());
+		usuario.alterarSenha(passwordEncoder.encode(dto.getNovaSenha()));
 		usuario.atualizarDataAlteracao();
 		usuarioRepository.save(usuario);
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import br.com.gestrest.dto.request.UsuarioSenhaRequestDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
@@ -20,7 +21,7 @@ public class UsuarioService {
 	private final UsuarioConsultaService consultaService;
 	private final UsuarioExclusaoService exclusaoService;
 
-	public UsuarioResponseDTO criar(UsuarioRequestDTO dto) {
+	public UsuarioResponseDTO criar(UsuarioRequestCadastroDTO dto) {
 		return criacaoService.criar(dto);
 	}
 
