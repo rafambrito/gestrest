@@ -34,8 +34,4 @@ public class Restaurante {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "proprietario", nullable = false)
     private Usuario proprietario;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "avaliacao_id")
-    private Avaliacao avaliacao;
 }
