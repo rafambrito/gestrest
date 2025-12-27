@@ -61,16 +61,6 @@ public interface UsuarioControllerDoc {
 					    }
 					"""))) UsuarioRequestDTO dto);
 
-	@Operation(summary = "Alterar senha")
-	ResponseEntity<Void> alterarSenha(@Parameter(description = "ID do usuário", example = "1") Long id,
-
-			@RequestBody(content = @Content(schema = @Schema(implementation = UsuarioSenhaRequestDTO.class), 
-			examples = @ExampleObject(name = "Exemplo alterar senha", value = """
-					    {
-					      "novaSenha": "999999"
-					    }
-					"""))) UsuarioSenhaRequestDTO dto);
-
 	@Operation(summary = "Excluir usuário")
 	ResponseEntity<Void> excluir(@Parameter(description = "ID do usuário", example = "1") Long id);
 

@@ -29,10 +29,6 @@ public class UsuarioService {
 		return atualizacaoService.atualizar(id, dto);
 	}
 
-	public void alterarSenha(Long id, UsuarioSenhaRequestDTO dto) {
-		senhaService.alterarSenha(id, dto);
-	}
-
 	public UsuarioResponseDTO login(String login, String senha) {
 		return loginService.login(login, senha);
 	}

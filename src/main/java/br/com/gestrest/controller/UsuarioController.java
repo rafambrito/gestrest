@@ -57,13 +57,6 @@ public class UsuarioController implements UsuarioControllerDoc {
 	}
 
 	@Override
-	@PatchMapping("/{id}/senha")
-	public ResponseEntity<Void> alterarSenha(@PathVariable Long id, @RequestBody @Valid UsuarioSenhaRequestDTO dto) {
-		service.alterarSenha(id, dto);
-		return ResponseEntity.noContent().build();
-	}
-
-	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 		service.excluir(id);
