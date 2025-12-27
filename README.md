@@ -1,154 +1,56 @@
-# GestRest – Gestão de Restaurantes  
-Tech Challenge – Fase 01 (FIAP / Pós Tech)
+# GestRest - Gestão de Restaurantes – Tech Challenge (Fase 1)
 
-O GestRest é uma API REST desenvolvida em Spring Boot para gestão de usuários de um sistema compartilhado entre restaurantes. O sistema permite o cadastro e gerenciamento de clientes e donos de restaurante, conforme os requisitos do Tech Challenge da Fase 01.
-
-A aplicação segue boas práticas de arquitetura MVC, princípios SOLID, versionamento de API e está totalmente dockerizada, utilizando Docker Compose e PostgreSQL como banco de dados relacional.
-
----
-
-## Objetivo
-
-Desenvolver um backend que permita:
-
-- Gerenciamento completo de usuários
-- Validação de login
-- Troca de senha em endpoint exclusivo
-- Atualização de dados do usuário em endpoint distinto
-- Persistência em banco de dados relacional
-- Execução padronizada via Docker
-
----
-
-## Arquitetura
-
-A aplicação segue o padrão MVC, organizada nas seguintes camadas:
-
-- Controller: exposição dos endpoints REST
-- Service: regras de negócio
-- Repository: persistência de dados com Spring Data JPA
-- DTOs: contratos da API
-- Mappers: conversão entre entidades e DTOs
-- Exceptions: tratamento centralizado de erros utilizando ProblemDetail (RFC 7807)
-
-Além do cadastro de usuários, o sistema possui um **CRUD específico para Tipos de Usuário**, permitindo o cadastro, consulta e exclusão de tipos como Cliente e Dono de Restaurante.
-
----
-
-## Tipos de Usuário
-
-O sistema contempla obrigatoriamente:
-
-- Dono de restaurante
-- Cliente
-
-## Usuário
-
-Campos obrigatórios do usuário:
-
-- Nome  
-- E-mail (único)  
-- Login  
-- Senha  
-- Endereço  
-- Data da última alteração  
-
----
-
-## Funcionalidades Implementadas
-
-- Cadastro, atualização e exclusão de usuários
-- Busca de usuários por nome
-- Garantia de unicidade do e-mail
-- Validação de login e senha
-- Troca de senha em endpoint exclusivo
-- Atualização de dados cadastrais em endpoint distinto do de senha
-- Registro da data da última alteração
-- Versionamento da API (`/api/v1`)
-- Tratamento de erros padronizado com ProblemDetail (RFC 7807)
+API REST em **Spring Boot** para gestão de restaurantes (**clientes** e **donos de restaurante**), com:
+- **Versionamento de API (v1)**
+- **Validação de login** (sem obrigatoriedade de Spring Security)
+- **Troca de senha** em endpoint exclusivo e **atualização de dados** em endpoint distinto
+- **E-mail único**, **busca por nome**, **data da última alteração**
+- Respostas de erro padronizadas com **ProblemDetail (RFC 7807)**
+- Documentação **OpenAPI/Swagger**
+- Execução via **Docker Compose** com **PostgreSQL**
 
 ---
 
 ## Stack
 
-- Java 21  
-- Spring Boot 3.3.x  
-- Spring Data JPA  
-- Spring Validation  
-- PostgreSQL  
-- Springdoc OpenAPI (Swagger)  
-- Docker e Docker Compose  
+- **Java** 21 (LTS)  
+- **Spring Boot** 3.3.x  
+- **Spring Data JPA**, **Validation**  
+- **PostgreSQL**  
+- **Springdoc OpenAPI** (Swagger UI)  
+- **Docker / Docker Compose**
+
+> Configuração central em `src/main/resources/application.yml`.
 
 ---
 
-## Documentação da API
+## Requisitos atendidos (resumo)
 
-A API está documentada com OpenAPI/Swagger, contendo exemplos de requisições, respostas de sucesso e respostas de erro.
+- CRUD de usuários (cliente e dono de restaurante)
+- Buscar usuários por **nome**
+- Garantir **unicidade de e-mail**
+- **Validação de login** (login + senha) em serviço/endpoint dedicados
+- **Troca de senha** em endpoint **exclusivo**
+- **Atualização de dados** do usuário em endpoint **distinto** do de senha
+- **Data da última alteração** registrada
+- **Versionamento de API** (ex.: `/api/v1/...`)
+- **Swagger/OpenAPI** com exemplos de sucesso e erro (ProblemDetail)
+- **Docker Compose** com banco relacional (PostgreSQL)
 
-Swagger UI disponível em:
+---
+
+## Como rodar localmente
+
+### Pré-requisitos
+- JDK 21 (ou JDK 17)
+- Maven 3.9+
+
+### 1) Rodando apenas a API (sem Docker / sem PostgreSQL)
+Em desenvolvimento
+A execução local (sem Docker) utiliza temporariamente H2 em memória até a integração definitiva com PostgreSQL.
+A API já está acessível e o Swagger pode ser aberto em:
 
 http://localhost:8080/swagger-ui/index.html
 
----
-
-
-## Testes com Postman
-
-O projeto inclui uma coleção Postman em formato JSON cobrindo os principais cenários exigidos no Tech Challenge:
-
-- Cadastro de usuário válido
-- Tentativa de cadastro com e-mail duplicado
-- Atualização de dados do usuário
-- Troca de senha
-- Busca de usuários por nome
-- Validação de login
-
-Arquivo da coleção:
-
-docs/postman/gestrest.postman_collection.json
-
----
-
-## Execução com Docker
-
-Pré-requisitos:
-
-- Docker  
-- Docker Compose  
-
-### Subindo a aplicação
-
-Na raiz do projeto, execute:
-
-```bash
-docker compose up --build
-```
-
-Após a inicialização:
-
-API disponível em: http://localhost:8080
-
-Swagger UI: http://localhost:8080/swagger-ui/index.html
-
-O banco de dados PostgreSQL é iniciado automaticamente em um container Docker separado, conforme configuração do docker-compose.yml.
-
-### Banco de Dados
-
-- PostgreSQL
-
-- Banco relacional executado via Docker
-
-- Persistência de dados garantida através de volumes Docker
-
-### Observações Finais
-
-A aplicação segue os princípios SOLID e boas práticas do Spring Boot
-
-Código organizado, modular e preparado para evolução
-
-Estrutura adequada para inclusão futura de autenticação com Spring Security e JWT
-
-### Autor
-
-Projeto desenvolvido como parte do Tech Challenge – Fase 01
-Curso de Pós-Graduação – FIAP
+   
+ 
