@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
-import br.com.gestrest.dto.request.UsuarioSenhaRequestDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

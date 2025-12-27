@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
-import br.com.gestrest.dto.request.UsuarioSenhaRequestDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +15,6 @@ public class UsuarioService {
 
 	private final UsuarioCriacaoService criacaoService;
 	private final UsuarioAtualizacaoService atualizacaoService;
-	private final UsuarioSenhaService senhaService;
 	private final UsuarioLoginService loginService;
 	private final UsuarioConsultaService consultaService;
 	private final UsuarioExclusaoService exclusaoService;

@@ -22,7 +22,7 @@ public class UsuarioRequestDTO {
     private String senha;
 
     @NotNull
-    private Integer estado;
+    private Integer status;
 
     @NotNull
     private Long tipoUsuarioId;

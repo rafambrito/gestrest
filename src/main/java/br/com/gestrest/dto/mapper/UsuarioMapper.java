@@ -8,7 +8,7 @@ import br.com.gestrest.domain.model.Usuario;
 import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import br.com.gestrest.dto.response.UsuarioResponseDTO;
-import br.com.gestrest.enums.UsuarioEstadoEnum;
+import br.com.gestrest.enums.StatusUsuarioEnum;
 
 @Component
 public class UsuarioMapper {
@@ -19,7 +19,7 @@ public class UsuarioMapper {
 		usuario.setEmail(dto.getEmail());
 		usuario.setLogin(dto.getLogin());
 		usuario.setSenha(dto.getSenha());
-		usuario.setEstado(dto.getEstado());
+		usuario.setEstado(dto.getStatus());
 
 		TipoUsuario tipo = new TipoUsuario();
 		tipo.setId(dto.getTipoUsuarioId());
@@ -38,7 +38,7 @@ public class UsuarioMapper {
 		usuario.setEmail(dto.getEmail());
 		usuario.setLogin(dto.getLogin());
 		usuario.setSenha(dto.getSenha());
-		usuario.setEstado(UsuarioEstadoEnum.ATIVO.getCodigoEstadoUsuario());
+		usuario.setEstado(StatusUsuarioEnum.ATIVO.getCodigoEstadoUsuario());
 
 		TipoUsuario tipo = new TipoUsuario();
 		tipo.setId(dto.getTipoUsuarioId());

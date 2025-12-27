@@ -50,7 +50,6 @@ public class ApiExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
 	public ProblemDetail handleErroGeral(Exception e) {
-
 		ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR,
 				"Erro inesperado. Contate o suporte.");
 

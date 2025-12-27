@@ -3,13 +3,13 @@ package br.com.gestrest.enums;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum UsuarioEstadoEnum {
+public enum StatusUsuarioEnum {
 
 	ATIVO(1), INATIVO(2), SUSPENSO(3);
 
 	private Integer codigoEstadoUsuario;
 
-	UsuarioEstadoEnum(int codigoEstadoUsuario) {
+	StatusUsuarioEnum(int codigoEstadoUsuario) {
 		this.codigoEstadoUsuario = codigoEstadoUsuario;
 	}
 
@@ -18,7 +18,7 @@ public enum UsuarioEstadoEnum {
 	}
 
 	public static String getDescricaoEstadoByCodigo(Integer codigo) {
-		for (UsuarioEstadoEnum estado : UsuarioEstadoEnum.values()) {
+		for (StatusUsuarioEnum estado : StatusUsuarioEnum.values()) {
 			if (estado.getCodigoEstadoUsuario().equals(codigo)) {
 				return estado.name();
 			}

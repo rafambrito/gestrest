@@ -3,18 +3,17 @@ package br.com.gestrest.service.validator;
 import org.springframework.stereotype.Component;
 
 import br.com.gestrest.domain.repository.EnderecoRepository;
-import br.com.gestrest.exception.NegocioException;
-import lombok.RequiredArgsConstructor;
+import br.com.gestrest.dto.request.UsuarioRequestCadastroDTO;
 
 @Component
-@RequiredArgsConstructor
-public class EnderecoCadastradoValidator {
+public class EnderecoCadastradoValidator extends EnderecoBaseValidator implements UsuarioValidator<UsuarioRequestCadastroDTO> {
 
-    private final EnderecoRepository enderecoRepository;
+	public EnderecoCadastradoValidator(EnderecoRepository repo) {
+		super(repo);
+	}
 
-    public void validar(Long id) {
-        if (!enderecoRepository.existsById(id)) {
-            throw new NegocioException("Endereço inexistente.");
-        }
-    }
+	@Override
+	public void validar(UsuarioRequestCadastroDTO dto) {
+		validarEndereco(dto.getEnderecoId());
+	}
 }

@@ -2,8 +2,6 @@ package br.com.gestrest.domain.model;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.ForeignKey;
-
 import br.com.gestrest.dto.request.UsuarioRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,7 +57,7 @@ public class Usuario {
         this.nome = dto.getNome();
         this.email = dto.getEmail();
         this.login = dto.getLogin();
-        this.estado = dto.getEstado();
+        this.estado = dto.getStatus();
     }
 
     public void alterarSenha(String novaSenha) {
