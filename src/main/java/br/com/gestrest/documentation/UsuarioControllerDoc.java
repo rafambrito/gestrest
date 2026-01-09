@@ -54,7 +54,7 @@ public interface UsuarioControllerDoc {
 					      "nome": "João Atualizado",
 					      "email": "joao@dominio.com",
 					      "login": "joao123",
-					      "estado": 2,
+					      "status": 2,
 					      "tipoUsuarioId": 1,
 					      "enderecoId": 3
 					    }
