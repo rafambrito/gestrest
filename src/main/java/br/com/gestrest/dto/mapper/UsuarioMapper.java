@@ -19,7 +19,7 @@ public class UsuarioMapper {
 		usuario.setEmail(dto.getEmail());
 		usuario.setLogin(dto.getLogin());
 		usuario.setSenha(dto.getSenha());
-		usuario.setEstado(dto.getStatus());
+		usuario.setStatus(dto.getStatus());
 
 		TipoUsuario tipo = new TipoUsuario();
 		tipo.setId(dto.getTipoUsuarioId());
@@ -38,7 +38,7 @@ public class UsuarioMapper {
 		usuario.setEmail(dto.getEmail());
 		usuario.setLogin(dto.getLogin());
 		usuario.setSenha(dto.getSenha());
-		usuario.setEstado(StatusUsuarioEnum.ATIVO.getCodigoEstadoUsuario());
+		usuario.setStatus(StatusUsuarioEnum.ATIVO.getCodigoEstadoUsuario());
 
 		TipoUsuario tipo = new TipoUsuario();
 		tipo.setId(dto.getTipoUsuarioId());
@@ -57,7 +57,7 @@ public class UsuarioMapper {
 		dto.setNome(usuario.getNome());
 		dto.setEmail(usuario.getEmail());
 		dto.setLogin(usuario.getLogin());
-		dto.setEstado(usuario.getEstado());
+		dto.setEstado(usuario.getStatus());
 		dto.setUltimaAlteracao(usuario.getDataUltimaAlteracao());
 
 		dto.setTipoUsuario(usuario.getTipoUsuario().getNome());

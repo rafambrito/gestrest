@@ -43,7 +43,7 @@ public class Usuario {
     private LocalDateTime dataUltimaAlteracao;
 
     @Column(nullable = false)
-    private Integer estado;
+    private Integer status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_usuario_id", nullable = false)
@@ -57,7 +57,7 @@ public class Usuario {
         this.nome = dto.getNome();
         this.email = dto.getEmail();
         this.login = dto.getLogin();
-        this.estado = dto.getStatus();
+        this.status	= dto.getStatus();
     }
 
     public void alterarSenha(String novaSenha) {
