@@ -10,7 +10,7 @@ public class UsuarioResponseDTO {
 	private String nome;
 	private String email;
 	private String login;
-	private Integer estado;
+	private Integer status;
 	private String tipoUsuario;
 	private String cidade;
 	private String cep;
