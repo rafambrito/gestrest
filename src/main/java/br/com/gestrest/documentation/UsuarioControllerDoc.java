@@ -33,7 +33,7 @@ public interface UsuarioControllerDoc {
 					      "login": "rafaelb",
 					      "senha": "123456",
 					      "tipoUsuarioId": 2,
-					      "enderecoId": 5
+					      "enderecoId": 2
 					    }
 					"""))) UsuarioRequestCadastroDTO dto);
 
@@ -54,9 +54,9 @@ public interface UsuarioControllerDoc {
 					      "nome": "João Atualizado",
 					      "email": "joao@dominio.com",
 					      "login": "joao123",
-					      "status": 2,
+					      "status": 1,
 					      "tipoUsuarioId": 1,
-					      "enderecoId": 3
+					      "enderecoId": 1
 					    }
 					"""))) UsuarioRequestDTO dto);
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import br.com.gestrest.domain.model.Usuario;
 import br.com.gestrest.domain.repository.UsuarioRepository;
 import br.com.gestrest.dto.request.UsuarioSenhaRequestDTO;
-import br.com.gestrest.exception.RecursoNaoEncontradoException;
+import br.com.gestrest.exception.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +21,10 @@ public class PasswordService {
 	public void alterarSenha(Long id, UsuarioSenhaRequestDTO dto) {
 		Usuario usuario = usuarioRepository.findById(id)
 				.orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
+		
+		if (!passwordEncoder.matches(dto.getSenhaAtual(), usuario.getSenha())) {
+			throw new NegocioException("Senha atual incorreta");
+		}
 
 		usuario.setSenha(passwordEncoder.encode(dto.getNovaSenha()));
 

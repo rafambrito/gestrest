@@ -24,7 +24,7 @@ public interface TipoUsuarioControllerDoc {
 	ResponseEntity<TipoUsuarioResponseDTO> criar(
 			@RequestBody(description = "Dados para criação de um novo tipo de usuário", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = TipoUsuarioRequestDTO.class), examples = @ExampleObject(name = "Exemplo de criação tipo de usuário", value = """
 					    {
-					      "nome": "Dono de restaurante"
+					      "nome": "Fornecedor"
 					    }
 					"""))) TipoUsuarioRequestDTO dto);
 

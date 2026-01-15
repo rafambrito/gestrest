@@ -9,6 +9,7 @@ import br.com.gestrest.domain.model.Usuario;
 import br.com.gestrest.domain.repository.UsuarioRepository;
 import br.com.gestrest.dto.request.AuthRequestDTO;
 import br.com.gestrest.dto.response.AuthResponseDTO;
+import br.com.gestrest.exception.*;
 import br.com.gestrest.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 
@@ -29,7 +30,7 @@ public class AuthService {
 
 		String token = jwtTokenProvider.generateToken(autenticado.getName());
 		Usuario usuario = usuarioRepository.findByLogin(autenticado.getName())
-				.orElseThrow();
+				.orElseThrow(() -> new NegocioException("Credenciais inválidas"));
 
 		return new AuthResponseDTO(usuario.getNome(), usuario.getEmail(),
 				usuario.getTipoUsuario().getNome(), token);

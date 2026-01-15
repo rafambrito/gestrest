@@ -5,6 +5,10 @@ import lombok.Data;
 
 @Data
 public class UsuarioSenhaRequestDTO {
+	
+	@NotBlank(message = "Senha atual é obrigatória.")
+	private String senhaAtual;
+	
 	@NotBlank(message = "Senha é obrigatória.")
 	private String novaSenha;
 }
