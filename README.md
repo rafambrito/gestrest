@@ -94,18 +94,23 @@ http://localhost:8080/swagger-ui/index.html
 
 ## Testes com Postman
 
-O projeto inclui uma coleção Postman em formato JSON cobrindo os principais cenários exigidos no Tech Challenge:
+O projeto inclui uma coleção de testes do Postman para validar os fluxos de negócio e garantir a integridade das regras estabelecidas no sistema GestRest. Os testes automatizados verificam desde a persistência correta dos dados até o tratamento de exceções.
 
-- Cadastro de usuário válido
-- Tentativa de cadastro com e-mail duplicado
-- Atualização de dados do usuário
-- Troca de senha
-- Busca de usuários por nome
-- Validação de login
+Cenários Implementados
+-  Cadastro de usuário válido: Criação de novo usuário com sucesso.
+-  Tentativa de cadastro com e-mail duplicado: Bloqueio de criação e retorno de erro para e-mails já existentes na base.
+-  Tentativa de cadastro com campos obrigatórios faltando: Validação de integridade dos dados de entrada.
+-  Alteração de senha com sucesso: Atualização de credenciais através de endpoint exclusivo de segurança.
+-  Alteração de senha com erro: Validação de falha ao tentar atualizar senha com parâmetros inválidos.
+-  Atualização de dados do usuário com sucesso: Modificação de informações cadastrais via endpoint distinto.
+-  Atualização de dados com erro: Tratamento de falhas na edição de perfil.
+-  Busca de usuários pelo nome: Localização de registros utilizando pelo nome.
+-  Validação de login: Autenticação para acesso ao sistema.
 
+    
 Arquivo da coleção:
 
-docs/postman/gestrest.postman_collection.json
+https://drive.google.com/file/d/1RJXkXlAgOLRTDR5Q_nZR3Q0lwSqHmLpL/view?usp=sharing
 
 ---
 
