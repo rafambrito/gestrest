@@ -104,27 +104,29 @@ O projeto inclui uma coleção de testes do Postman para validar os fluxos de ne
 * 🔎 Busca de usuários pelo nome: Localização de registros.
 * 🛂 Validação de login: Autenticação para acesso ao sistema.
 
-📂 **Arquivo da coleção:**
+### 🧪 **Cenários de Testes (Postman)**
 
-/docs
-	/postman
-		/FIAP-GestRest.postman_collection-final.json
+Você pode acessar a coleção de testes de duas formas:
 
-ou através do link:
-		
-https://drive.google.com/file/d/1RJXkXlAgOLRTDR5Q_nZR3Q0lwSqHmLpL/view?usp=sharing
+* 📁 **Localmente no repositório:**
+  `docs/postman/FIAP-GestRest.postman_collection-final.json`
 
+* ☁️ **Download via Google Drive:**
+  🔗 [Clique aqui para baixar a coleção](https://drive.google.com/file/d/1RJXkXlAgOLRTDR5Q_nZR3Q0lwSqHmLpL/view?usp=sharing)
 ---
 
 ## 📦 **Execução com Docker**
 
 ### 📋 **Pré-requisitos:**
-* **Docker** * **Docker Compose** ### ⚙️ **Subindo a aplicação**
+* **Docker** * **Docker Compose**
 
-Na raiz do projeto, execute:
+### ⚙️ **Subindo a aplicação**
+
+Na raiz do projeto, execute o comando abaixo. 
+*(Nota: Dependendo da sua configuração do Docker no Linux, pode ser necessário preceder o comando com **sudo**)*:
 
 ```bash
-docker compose up --build
+sudo docker compose up -d --build
 ```
 
 ---
