@@ -116,7 +116,8 @@ Você pode acessar a coleção de testes de duas formas:
 ## 📦 **Execução com Docker**
 
 ### 📋 **Pré-requisitos:**
-* **Docker** * **Docker Compose**
+* **Docker** 
+* **Docker Compose**
 
 ### ⚙️ **Subindo a aplicação**
 
