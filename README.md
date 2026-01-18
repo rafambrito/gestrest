@@ -143,6 +143,7 @@ O banco de dados **PostgreSQL** é iniciado automaticamente em um container **Do
 * 🐘 **PostgreSQL**
 * 🐳 Banco relacional executado via **Docker**
 * 💾 Persistência de dados garantida através de **volumes Docker**
+* 📊 Integração via Spring Data JPA e Hibernate
 
 ---
 
