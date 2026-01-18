@@ -78,7 +78,7 @@ Campos obrigatórios do usuário:
 * ✔️ **Spring Validation** 
 * 🐘 **PostgreSQL** 
 * 📖 **Springdoc OpenAPI (Swagger)** 
-* 🐳 **Docker e Docker Compose** ---
+* 🐳 **Docker e Docker Compose**
 
 ## 📄 **Documentação da API**
 
