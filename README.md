@@ -105,6 +105,13 @@ O projeto inclui uma coleção de testes do Postman para validar os fluxos de ne
 * 🛂 Validação de login: Autenticação para acesso ao sistema.
 
 📂 **Arquivo da coleção:**
+
+/docs
+	/postman
+		/FIAP-GestRest.postman_collection-final.json
+
+ou através do link:
+		
 https://drive.google.com/file/d/1RJXkXlAgOLRTDR5Q_nZR3Q0lwSqHmLpL/view?usp=sharing
 
 ---
