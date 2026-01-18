@@ -122,6 +122,7 @@ Você pode acessar a coleção de testes de duas formas:
 ### ⚙️ **Subindo a aplicação**
 
 Na raiz do projeto, execute o comando abaixo. 
+
 *(Nota: Dependendo da sua configuração do Docker no Linux, pode ser necessário preceder o comando com **sudo**)*:
 
 ```bash
