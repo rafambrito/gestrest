@@ -104,8 +104,6 @@ O projeto inclui uma coleção de testes do Postman para validar os fluxos de ne
 * 🔎 Busca de usuários pelo nome: Localização de registros.
 * 🛂 Validação de login: Autenticação para acesso ao sistema.
 
-### 🧪 **Cenários de Testes (Postman)**
-
 Você pode acessar a coleção de testes de duas formas:
 
 * 📁 **Localmente no repositório:**
@@ -161,7 +159,7 @@ O banco de dados **PostgreSQL** é iniciado automaticamente em um container **Do
 ### 👥 **Grupo**
 
 * Vithor Llaguno Veronese (RM369140)
-* Eduardo Jerônimo Bernardino (RM37009)
+* Eduardo Jerônimo Bernardino (RM370093)
 * Rafael Mendonça de Brito (RM369933)
 * Rafael Colin Rios (RM369259)
 
