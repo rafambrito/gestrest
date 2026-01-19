@@ -2,23 +2,28 @@ spring:
   application:
     name: gestrest	 
 
-  # DataSource H2 em memória (sem instalação)
   datasource:
-    url: jdbc:h2:mem:restapi;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/gestrest
+    driver-class-name: org.postgresql.Driver
+    username: admin
+    password: admin
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         format_sql: true
-    show-sql: true
+
+  sql:
+    init:
+      mode: always
 
   mvc:
     problemdetails:
-      enabled: true  # ativa respostas RFC 7807
+      enabled: true
 
 server:
   port: 8080
@@ -30,9 +35,13 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
-# OpenAPI/Swagger (Springdoc)
 springdoc:
   api-docs:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+gestrest:
+  jwt:
+    secret: "gestrest-super-secret-key-32-chars-minimo-123"
+    expiration-minutes: 60

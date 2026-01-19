@@ -1,0 +1,1264 @@
+{
+	"info": {
+		"_postman_id": "a8ecb4bd-de1a-4989-afd5-52b472ceb727",
+		"name": "FIAP-GestRest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "46090426",
+		"_collection_link": "https://ed-9561051.postman.co/workspace/Ed's-Workspace~a92157e8-992c-41ae-87dd-50a5de267e39/collection/46090426-a8ecb4bd-de1a-4989-afd5-52b472ceb727?action=share&source=collection_link&creator=46090426"
+	},
+	"item": [
+		{
+			"name": "Cadastro Valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Cadastro Valido",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status is 2xx (POST endpoint expects 201 Created)",
+							"    pm.test('Status is successful (2xx)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(200, 299);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"",
+							"    // 4. POST endpoint specific assertions - expects 201 Created and response contains id",
+							"    const method = pm.request.method.toUpperCase();",
+							"    if (method === 'POST') {",
+							"      pm.test('POST created resource with id', () => {",
+							"        pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+							"        if (contentType.includes('application/json')) {",
+							"          const json = pm.response.json();",
+							"          pm.expect(json).to.have.property('id');",
+							"          pm.collectionVariables.set('lastCreatedId', json.id);",
+							"        }",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório\",\n  \"email\": \"tenorio@gmail.com\",\n  \"login\": \"tenor\",\n  \"senha\": \"A345lcja\",\n  \"tipoUsuarioId\": 1,\n  \"enderecoId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro - Email duplicado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Cadastro - Email duplicado",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects error for duplicate email (4xx)",
+							"    pm.test('Status indicates duplicate email error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório\",\n  \"email\": \"tenorio@gmail.com\",\n  \"login\": \"tenor\",\n  \"senha\": \"A345lcja\",\n  \"tipoUsuarioId\": 1,\n  \"enderecoId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro - Nome Não Informado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Cadastro - Nome Não Informado",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"\",\n  \"email\": \"tenorio2@gmail.com\",\n  \"login\": \"tenor2\",\n  \"senha\": \"A345lcja\",\n  \"tipoUsuarioId\": 1,\n  \"enderecoId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro - Email Não Informado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Cadastro - Email Não Informado",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório\",\n  \"email\": \"\",\n  \"login\": \"tenor\",\n  \"senha\": \"A345lcja\",\n  \"tipoUsuarioId\": 1,\n  \"enderecoId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro - Login Não Informado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Cadastro - Login Não Informado",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório\",\n  \"email\": \"tenorio@gmail.com\",\n  \"login\": \"\",\n  \"senha\": \"A345lcja\",\n  \"tipoUsuarioId\": 1,\n  \"enderecoId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro - Senha Não Informada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Cadastro - Senha Não Informada",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório\",\n  \"email\": \"tenorio@gmail.com\",\n  \"login\": \"tenor\",\n  \"senha\": \"\",\n  \"tipoUsuarioId\": 1,\n  \"enderecoId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro - Tipo Usuário Não Informado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Cadastro - Tipo Usuário Não Informado",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório\",\n  \"email\": \"tenorio@gmail.com\",\n  \"login\": \"tenor\",\n  \"senha\": \"A345lcja\",\n  \"tipoUsuarioId\": null,\n  \"enderecoId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Dados Usuário - Sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Atualizar Dados Usuário - Sucesso",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status is 2xx (successful update)",
+							"    pm.test('Status is successful (2xx)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(200, 299);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"",
+							"    // 4. PUT/PATCH specific assertions",
+							"    const method = pm.request.method.toUpperCase();",
+							"    if (method === 'PUT' || method === 'PATCH') {",
+							"      pm.test('Update response validation', () => {",
+							"        pm.expect(pm.response.code).to.be.within(200, 299);",
+							"        if (contentType.includes('application/json')) {",
+							"          const json = pm.response.json();",
+							"          // Check if response has id",
+							"          if (json && typeof json === 'object') {",
+							"            pm.expect(json).to.have.property('id');",
+							"          }",
+							"        }",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório de Oliveira\",\n  \"email\": \"tenoriobrazil@gmail.com\",\n  \"login\": \"boss\",\n  \"status\": 1,\n  \"tipoUsuarioId\": 1,\n  \"enderecoId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Dados Usuário - Erro Nome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Atualizar Dados Usuário - Erro Nome",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": null,\n  \"email\": \"tenoriobrazil@gmail.com\",\n  \"login\": \"boss\",\n  \"status\": 1,\n  \"tipoUsuarioId\": 2,\n  \"enderecoId\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Dados Usuário - Erro Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Atualizar Dados Usuário - Erro Email",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório de Oliveira\",\n  \"email\": \"\",\n  \"login\": \"boss\",\n  \"status\": 1,\n  \"tipoUsuarioId\": 2,\n  \"enderecoId\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Dados Usuário - Erro Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Atualizar Dados Usuário - Erro Login",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório de Oliveira\",\n  \"email\": \"tenoriobrazil@gmail.com\",\n  \"login\": \"\",\n  \"status\": 1,\n  \"tipoUsuarioId\": 2,\n  \"enderecoId\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Dados Usuário - Erro Tipo Usuário",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Atualizar Dados Usuário - Erro Tipo Usuário",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório de Oliveira\",\n  \"email\": \"tenoriobrazil@gmail.com\",\n  \"login\": \"boss\",\n  \"status\": 1,\n  \"tipoUsuarioId\": null,\n  \"enderecoId\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Dados Usuário - Erro Endereco",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Atualizar Dados Usuário - Erro Endereco",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects validation error (4xx)",
+							"    pm.test('Status indicates validation error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"José Tenório de Oliveira\",\n  \"email\": \"tenoriobrazil@gmail.com\",\n  \"login\": \"boss\",\n  \"status\": 1,\n  \"tipoUsuarioId\": 2,\n  \"enderecoId\": 9000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/usuarios/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Autenticação - Validação Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Autenticação - Validação Login",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status is 2xx (successful authentication)",
+							"    pm.test('Status is successful (2xx)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(200, 299);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"",
+							"    // 4. POST endpoint specific assertions for authentication",
+							"    const method = pm.request.method.toUpperCase();",
+							"    if (method === 'POST') {",
+							"      pm.test('Authentication response validation', () => {",
+							"        pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+							"        if (contentType.includes('application/json')) {",
+							"          const json = pm.response.json();",
+							"          // Authentication typically returns a token or user info",
+							"          pm.expect(json).to.be.an('object');",
+							"        }",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login\": \"boss\",\n  \"senha\": \"A345lcja\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Autenticação - Validação Login Erro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Autenticação - Validação Login",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status is 2xx (successful authentication)",
+							"    pm.test('Status is Error (5xx)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(500, 599);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"",
+							"    // 4. POST endpoint specific assertions for authentication",
+							"    const method = pm.request.method.toUpperCase();",
+							"    if (method === 'POST') {",
+							"      pm.test('Authentication response validation', () => {",
+							"        pm.expect(pm.response.code).to.be.oneOf([500, 501, 502, 503]);",
+							"        if (contentType.includes('application/json')) {",
+							"          const json = pm.response.json();",
+							"          // Authentication typically returns a token or user info",
+							"          pm.expect(json).to.be.an('object');",
+							"        }",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login\": \"boss\",\n  \"senha\": \"A345lcjb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Alteração Senha - Sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Alteração Senha - Sucesso",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status is 2xx (successful password change)",
+							"    pm.test('Status is successful (2xx)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(200, 299);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"",
+							"    // 4. Method-specific checks for PUT/PATCH (password update)",
+							"    const method = pm.request.method.toUpperCase();",
+							"    if (method === 'PUT' || method === 'PATCH') {",
+							"      pm.test('Update response validation', () => {",
+							"        pm.expect(pm.response.code).to.be.within(200, 299);",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"senhaAtual\": \"A345lcja\",\n  \"novaSenha\": \"aSe68r74@!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/password/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Alteracao Senha - Erro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Alteracao Senha - Erro",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status - expects error (4xx)",
+							"    pm.test('Status indicates error (4xx expected)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(400, 499);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"senhaAtual\": \"345lcjv\",\n  \"novaSenha\": \"aSe68r74@!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/password/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Usuário pelo Nome - Sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Consulta Usuário pelo Nome - Sucesso",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status is 2xx (successful GET)",
+							"    pm.test('Status is successful (2xx)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(200, 299);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"",
+							"    // 4. GET endpoint specific assertions",
+							"    const method = pm.request.method.toUpperCase();",
+							"    if (method === 'GET') {",
+							"      pm.test('GET returns expected shape', () => {",
+							"        if (contentType.includes('application/json')) {",
+							"          const json = pm.response.json();",
+							"          pm.expect(json).to.satisfy((data) => {",
+							"            return typeof data === 'object' || Array.isArray(data);",
+							"          });",
+							"          // For list endpoints, check array items have id",
+							"          if (Array.isArray(json) && json.length > 0) {",
+							"            pm.expect(json[0]).to.have.property('id');",
+							"          }",
+							"          // For single resource, check it has id",
+							"          if (!Array.isArray(json) && json !== null) {",
+							"            pm.expect(json).to.have.property('id');",
+							"          }",
+							"        }",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/usuarios/buscar?nome=josé",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"usuarios",
+						"buscar"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "josé"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Usuário por Nome  - Inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Comprehensive post-request test script for: Consulta Usuário pelo Nome - Sucesso",
+							"(() => {",
+							"  try {",
+							"    // 1. Verify response status is 2xx (successful GET)",
+							"    pm.test('Status is successful (2xx)', () => {",
+							"      pm.expect(pm.response.code).to.be.within(200, 299);",
+							"    });",
+							"",
+							"    // 2. Response time under 2000ms",
+							"    pm.test('Response time is under 2000ms', () => {",
+							"      pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"    });",
+							"",
+							"    // 3. Valid JSON when Content-Type is application/json",
+							"    const contentType = pm.response.headers.get('Content-Type') || '';",
+							"    if (contentType.includes('application/json')) {",
+							"      pm.test('Response is valid JSON', () => {",
+							"        pm.response.to.be.json;",
+							"      });",
+							"    }",
+							"",
+							"    // 4. GET endpoint specific assertions",
+							"    const method = pm.request.method.toUpperCase();",
+							"    if (method === 'GET') {",
+							"      pm.test('GET returns expected shape', () => {",
+							"        if (contentType.includes('application/json')) {",
+							"          const json = pm.response.json();",
+							"          pm.expect(json).to.satisfy((data) => {",
+							"            return typeof data === 'object' || Array.isArray(data);",
+							"          });",
+							"          // For list endpoints, check array items have id",
+							"          if (Array.isArray(json) && json.length > 0) {",
+							"            pm.expect(json[0]).to.have.property('id');",
+							"          }",
+							"          // For single resource, check it has id",
+							"          if (!Array.isArray(json) && json !== null) {",
+							"            pm.expect(json).to.have.property('id');",
+							"          }",
+							"        }",
+							"      });",
+							"    }",
+							"  } catch (err) {",
+							"    console.log('Test script error:', err);",
+							"  }",
+							"})();"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/usuarios/buscar?nome=Adriana",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"usuarios",
+						"buscar"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "Adriana"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos usuários",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test: Status code is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test: Response time is acceptable (< 1000ms)",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"// Test: Response is a JSON array",
+							"pm.test(\"Response is a JSON array\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an('array');",
+							"});",
+							"",
+							"// Test: Validate user object structure if array is not empty",
+							"pm.test(\"User object structure is valid (if users exist)\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    ",
+							"    if (jsonData.length === 0) {",
+							"        console.log(\"ℹ️ No users returned - array is empty\");",
+							"        return;",
+							"    }",
+							"    ",
+							"    const user = jsonData[0];",
+							"    ",
+							"    // Validate required fields exist and have correct types",
+							"    pm.expect(user).to.have.property('id');",
+							"    pm.expect(user.id).to.be.a('number');",
+							"    ",
+							"    pm.expect(user).to.have.property('nome');",
+							"    pm.expect(user.nome).to.be.a('string');",
+							"    ",
+							"    pm.expect(user).to.have.property('email');",
+							"    pm.expect(user.email).to.be.a('string');",
+							"    ",
+							"    pm.expect(user).to.have.property('login');",
+							"    pm.expect(user.login).to.be.a('string');",
+							"    ",
+							"    pm.expect(user).to.have.property('status');",
+							"    pm.expect(user.status).to.be.a('number');",
+							"    ",
+							"    pm.expect(user).to.have.property('tipoUsuario');",
+							"    pm.expect(user.tipoUsuario).to.be.a('string');",
+							"    ",
+							"    pm.expect(user).to.have.property('cidade');",
+							"    pm.expect(user.cidade).to.be.a('string');",
+							"    ",
+							"    pm.expect(user).to.have.property('cep');",
+							"    pm.expect(user.cep).to.be.a('string');",
+							"    ",
+							"    pm.expect(user).to.have.property('ultimaAlteracao');",
+							"    pm.expect(user.ultimaAlteracao).to.be.a('string');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/usuarios"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Collection pre-request script - sets baseUrl and lastRunTimestamp before each request",
+					"pm.collectionVariables.set('baseUrl', pm.collectionVariables.get('baseUrl') || 'https://api.example.com');",
+					"pm.collectionVariables.set('lastRunTimestamp', new Date().toISOString());"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "lastRunTimestamp",
+			"value": ""
+		},
+		{
+			"key": "lastCreatedId",
+			"value": ""
+		}
+	]
+}
